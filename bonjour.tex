@@ -560,42 +560,98 @@
 \rhead{Le cadre du stage}
 \part{Le cadre du stage}
 	\section{Description de la structure sociale}
-	\paragraph{}
-	?? What??
+		Equipe performance secteur R\&D (5 membres)
+		Organigramme à présenter.
 	\section{Fonctionnement}
-	\paragraph{}
-	Fonctionnement de quoi??
+		Fonctionnement de quoi??
+	\section{La vie en société}
+		\subsection{L’articulation des différents départements}
+		\subsection{Les relations humaines entre les employés}
 
 \newpage
 \rhead{Travaux effectués et apports du stage}
 \part{Travaux effectués et apports du stage}
+	\section{Introduction}
+		La mission principale du stage consisté à étudier l'accélerateur d'Intel. Le but étant d'évaluer les performances de la carte,
+		mais aussi d'en comprendre le fonctionnement tant sur le plan matériel que logiciel. La carte présente dans nos bureaux,
+		appelé Knights Ferry était une version alpha. Une version beta (Knights Corner) fut disponible plus tard dans les bureaux
+		d'Echiroles et je pu effectuer des tests sur cette carte également.
+		J'ai également travailler sur le projet OpenGPU en partenariat notamment avec l'Ecole Centrale de Paris et le CEA,
+		en faisant des tests comparatifs en GPU et CPU.
+		Pour mener à bien ces missions différents matériels étaient à disposition.
+		J'ai appris pas mal de choses l'autonomie, le travaille en groupe et surtout à trouver des solutions aux problèmes.
 	\section{Travaux effectués}
-		\subsection{Introduction}
-			1) Travaux sur Knights Ferry, étude de performance
-			\newline{}
-			2) Diverses mesures sur GPU avec Centrale et le CEA projet OpenGPU
-			\newline{}
-			3) Knights Corner?
-			\newline{}
 		\subsection{Les outils}
-			Un PC perso avec OS au choix, choix de Linux (Ubuntu).
-			Un PC avec avec une Redhat Entreprise et le MIC.
-			Utilisation des lames de Bull pour les tests sur GPU.
-			Accès à un PC distant à Echirolles pour les travaux sur Knights Corner.
+			J'avais un ordinateur personnel avec le choix de l'environnement. J'y ai installé Ubuntu.\newline
+			Un second ordinateur, qui contenait l'accélerateur Intel, était à disposition de toute l'équipe:\newline
+				(Description de la machine)\newline
+			Des serveurs étaient également disponible pour l'équipe avec du matériel varié:\newline
+				(description des lames... tableaux ect...)\newline
+			Finalement on eu accès au Knights Corner d'Echirolles:\newline
+				(description machines echirolles)\newline
 		\subsection{Les missions}
-			1) Knights Ferry
-			2) OpenGpu
-			3) Knights Corner
+			\begin{enumerate}
+			\item Knights Ferry
+				\begin{itemize}
+				\item Lecture de doc
+				\item installation de driver
+				\item Portage de benchmark pour le MIC
+					\begin{itemize}
+					\item Bench élémentaire interne à l'équipe (C)
+					\item SpecInt et SpecOMP (perl, C)
+					\end{itemize}
+				\item Ecriture de mes propres tests de performances
+					\begin{itemize}
+					\item tests FLOPS pur (assembleur, C)
+					\item portage de DGEMM et SGEMM (C)
+					\item test bande passante
+					\end{itemize}
+				\item Portage code existant
+					\begin{itemize}
+					\item tsha (assembleur, C)
+					\item Hydro (C)
+					\end{itemize}
+				\item Ecriture de doc (wiki)
+				\item Outils
+					\begin{itemize}
+					\item Test débit port PCIe (C)
+					\end{itemize}
+				\end{itemize}
+				( Présenter quelque résultats ! confidantialité!! ! )
+			\item OpenGpu
+				\begin{itemize}
+				\item Test CPU vs GPU
+					\begin{itemize}
+					\item Energie
+					\item Puissance
+					\item Résultats
+					\end{itemize}
+				\end{itemize}
+			\item Knights Corner
+				\begin{itemize}
+				\item Nouveaux driver ==> nouvelle doc
+				\item Même test que pour knights Ferry
+				\item Réecriture de certain bout de code:
+						\begin{itemize}
+						\item tsha
+						\item SpecInt
+						\end{itemize}
+				\item Plus de tests dispo sur specInt
+				\item Test en mode large pour SpecOMP
+				\end{itemize}
+			\end{enumerate}
 	\section{Apports du stage}
 		\subsection{Compétences acquises}
+			\begin{itemize}
+			\item Autonomie.
+			\item Travaille en groupe.
+			\item Organisation. (Wiki, livrable simple d'utilisation)
+			\item Compétences techniques. (debogage, perl, acces distant, GPU)
+			\end{itemize}
 		\subsection{Difficultés rencontrées et solutions apportées}
-		\subsection{La vie en société}
-			\subsubsection{L’articulation des différents départements}
-			\subsubsection{Les relations humaines entre les employés}
-	\paragraph{}
-	Cantine pas chère!
-
+			Oulalala
 \newpage
 \rhead{Conclusion}
 \part{Conclusion}
+	En somme c'etait pas mal!!
 \end{document}

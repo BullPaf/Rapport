@@ -605,6 +605,117 @@
 			Finalement on eu accès au Knights Corner d'Echirolles:\newline
 				(description machines echirolles)\newline
 		\subsection{Les missions}
+			\subsubsection{Knights Ferry}
+				\paragraph{}
+				Knights Ferry est le nom donné à la carte MIC (Many Integrated Cores) d'Intel dans sa version alpha. Il s'agit 
+				d'un accélérateur assez similaire à un GPU dans le sens où l'on peut exécuter des noyaux de calcul sur la 
+				carte afin d'accélerer les programmes. La mission principale était de comprendre le fonctionnement de cette
+				carte, d'en évaluer dans un premier temps les performances théoriques puis dans un deuxième temps les 
+				performances réelles sur des programmes de tests. D'une manière plus générale toutes les connaissances ont
+				été systématiquement reportées sur un wiki interne.
+				\paragraph{Documentation}
+				Ce materiel étant nouveau et encore dans une version d'Alpha, son fonctionnement tant au niveau harware que
+				software était encore inconnu. Il aura donc fallu avant tout lire la documentation fournie. Ceci me permi de 
+				connaître les propriétés harware de la carte, comme le nombre de coeurs, de threads par coeur ou encore 
+				la taille des registres. Ce travail fut indispensable pour estimer les performances théoriques de la carte 
+				et de pouvoir coroborer les performances observées avec le matériel. \newline
+				J'ai également pu noter la procédure d'installation des drivers, et de manière générale l'utilisation
+				de la carte à savoir comment démarrer le MIC, ou encore comment compiler un code pour la carte et les 
+				différents modes d'exécution. \newline
+				J'y ai également trouver la liste des outils indispensables comme le debuggeur ou encore un programme de
+				monitoring ainsi que plusieurs outils d'information et de configuration.
+				\paragraph{Drivers}
+				La premiere chose à faire était donc l'installation de la carte et des drivers puis de vérifier le bon
+				fonctionement de la carte. Cette étape se déroula sans problème, en effet l'installation consisté en 
+				l'exécution d'un simple script python, et les outils fourni m'on permis de constater que la carte était
+				correctement installée et reconnue.
+				\paragraph{Benchmark pour le MIC}
+				Dès lors, le but était de pouvoir évaluer les performance de l'accélerateur tels que le débit mémoire,
+				la puissance de calcul, les latences etc.. \newline
+				Il existe de nombreux programmes de benchmark disponibles, l'idée était donc de porter les tests en notre
+				possession sur le MIC ce qui dans un premier temps était peut-être moins adapté au hardware particulier
+				de la carte mais nous permettrait d'appéhender le matériel et d'obtenir des résultats plus rapidement 
+				que s'il avait fallu écrire des tests spécifiques au MIC.
+					\subparagraph{}
+					L'équipe avait un ensemble de tests, écrit en C, pour annalyser les performances d'un machine sur chacun de ses 
+					composants. Il m'a donc était demandé de porter ses tests pour le MIC. \newline
+					Contrairement au GPU classique NVidia ou AMD, des codes en C ou FORTRAN existant peuvent directement
+					s'exécuter sur le MIC si le bon flag a été donnée à la compilation. Ceci rend le portage de code
+					simple et rapide. De cette manière le programme se lance, et s'exécute intégralement sur la carte
+					sans interaction avec l'hôte.\newline
+					La plus grosse difficulté a donc été de compiler correctement ces tests. Il aura fallu pour cela editer 
+					les Makefile inclure les bon headers et correctement linker les différentes bibliothèques spécifiques au 
+					MIC. \newline
+					(Parler des résultats?)
+					\subparagraph{}
+					Parmi les programmes de tests standard qui permettent de classifier les différentes machines SpecINT et 
+					SpecFP sont parmis les plus souvent utilisés. Il a donc semblé intéressant de les exécuter sur le MIC
+					afin de pouvoir le comparer à d'autre solution de calcul. \newline
+					CPU2000 est un ensemble de benchmark conçu pour tester les performances des CPU des serveurs. Le programme
+					est écrit princpalement en perl, bash et C. Les tests en eux mêmes sont écrits en C et C++, et Il est 
+					divisé en deux parties: CINT2000 et CFP2000 pour la partie flotante simple précision. \newline
+					L'exécution de SPECInt peut se décomposer en quatre grandes étapes: \newline
+					\begin{description}
+					\item[Compilation :]
+						Les différents programmes de test sont compilés, et les paramètres sont donnés à l'aide d'un fichier
+						de configuration éditer au préable pour la machine sur laquelle doit être exécuter SPECInt
+					\item [Configuration :]
+						Etant donné les tests à exécuter et les paramètres choisis (taille des données en entré, type de test
+						à effectuer) les différents benchs sont paramétrés.
+					\item [Exécution :]
+						Les tests sont effectués, et sont mesurés grace à un binaire "specinvoke".
+					\item [Résultat :]
+						Les résultats des tests sont compilés, et plusieurs fichiers de sortis sont créés (html, asc etc...)
+						pour résumer les performances.
+					\end{description}
+					Il y avait alors deux possibilités pour utiliser SPECInt sur le MIC. Soit tout faire sur le MIC, soit 
+					ne faire que la partie exécution et mesures sur la carte. \newline
+					La deuxième solution a été rapidement choisie car la première avait de nombreux inconvénient. En effet il 
+					aurait fallu recompiler l'ensemble de SPECInt pour MIC pour que les outils et binaire puisse s'exécuter
+					dessus. Il aurait également fallu à chaque redémarage de la carte, réinstallé SPECInt dessus ou alors 
+					créer une image du système pour le MIC avec SPECInt installé. Ces solutions étaient beaucoup trop complexes
+					et le choix de la cross-compilation a donc été préféré. \newline
+					Ainsi, s'il est précisé dans le fichier de configuration, que les tests sont destinés à un matériel de type
+					MIC, alors la compilation se fera sur la machine hôte mais pour Knights Ferry. \newline
+					La configuration se fait de la même manière quelque soit le support des tests. \newline
+					L'exécution doit évidemment se faire sur la carte, l'ensemble des fichiers nécessaires aux tests en questions
+					sont donc envoyés sur le MIC. A la fin de l'exécution, les fichiers de résultats sont rapatriés vers l'hôte. \newline
+					Enfin les résultats sont analysés normalement.
+					\subparagraph{}
+					Une fois SPECInt fonctionnel pour MIC, l'interêt a donc été de le comparer à un processeur généraliste
+					de type Sandy Bridge, mais surtout d'en analyser les résultats et d'en comprendre les raisons.
+					(Est ce que je peux détailler?)
+					\subparagraph{}
+					SPECOMP!
+					(Résultats?)
+				\paragraph{Tests de performances}
+				Pour étudier plus finement les performances il fallu écrire des tests moins généralistes et plus spécifiques
+				à certaine partie de la carte, comme le processeur ou la mémoire.
+					\subparagraph{}
+					Les tests de calculs donnaient des résultats très inferieurs aux performances théoriques et performances 
+					attendues. Après analyse il s'avera que les codes n'etaient que très rarement vectorisés du à un compilateur 
+					en version alpha, que les bibliothèques de calculs étaient toujours en cours de dévelopement et donc pas 
+					encore optimisées pour le MIC et que la seule façon d'obtenir les performances maximums seraient d'utiliser
+					des instruction de type FMA (fused multiply-add) qui réalisent en une instruction des multiplications et 
+					des additions sur un vecteur. \newline
+					En partant d'un code assembleur qui permettait de vérifier qu'un processeur supportait l'AVX, nous avons 
+					pour chacun des 32 registres de chaque processeur exécuter l'instruction \emph{vmadd213ps} qui réalise le 
+					produit de deux vecteurs 512 bits (soit 16 floats) puis additionne tout les éléments du vecteur résultat.
+					Une seule instruction réalise donc 32 opérations simple précision.
+					Comme on exécute cette instruction pour les 32 registres, l'ensemble du code réalise 1024 opérations simple
+					précision (Voir figure 12). Ainsi les pipelines des processeurs sont bien remplis et tout les registres sont
+					utilisés. Ce code a permis d'atteindre 90.75\% de la performance crête théorique.
+					\begin{figure}[!ht]
+					\begin{center}
+					\includegraphics[scale=0.5]{assembleur.png}
+					\caption{Assembleur}
+					\end{center}
+					\end{figure}
+					\subparagraph{}
+					Toujours pour tester la puissance de calcul de la carte, mais sur un test moins artificiel, nous avons voulu
+					voir les performances pour des calculs matriciels. SGEMM et DGEMM (pour sa version double precision) sont 
+					des fonctions de multiplications de matrices très bien implémentées et optimisées dans les bibliothèques de 
+					calcul notemment dans la MKL (Maths Kernel Library) d'Intel. 
 			\begin{enumerate}
 			\item Knights Ferry
 				\begin{itemize}
@@ -620,6 +731,7 @@
 					\item tests FLOPS pur (assembleur, C)
 					\item portage de DGEMM et SGEMM (C)
 					\item test bande passante
+					\item test latence mémoire
 					\end{itemize}
 				\item Portage code existant
 					\begin{itemize}
@@ -630,6 +742,7 @@
 				\item Outils
 					\begin{itemize}
 					\item Test débit port PCIe (C)
+					\item Test fiabilité port PCIe (C)
 					\end{itemize}
 				\end{itemize}
 				( Présenter quelque résultats ! confidantialité!! ! )
@@ -649,7 +762,7 @@
 				\item Réecriture de certain bout de code:
 						\begin{itemize}
 						\item tsha
-						\item SpecInt
+						\item SpecInt \& SpecOMP
 						\end{itemize}
 				\item Plus de tests dispo sur specInt
 				\item Test en mode large pour SpecOMP

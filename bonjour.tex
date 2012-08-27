@@ -715,7 +715,18 @@
 					Toujours pour tester la puissance de calcul de la carte, mais sur un test moins artificiel, nous avons voulu
 					voir les performances pour des calculs matriciels. SGEMM et DGEMM (pour sa version double precision) sont 
 					des fonctions de multiplications de matrices très bien implémentées et optimisées dans les bibliothèques de 
-					calcul notemment dans la MKL (Maths Kernel Library) d'Intel. 
+					calcul notemment dans la MKL (Maths Kernel Library) d'Intel. \newline
+					La première implémentation du test s'exécuter sur la machine hôte, et seule la partie de calcul était 
+					exécutée sur le MIC. Il était cependant difficil de pouvoir mesurer uniquement les temps de calculs. En effet
+					l'implémentation pour le MIC de ce type de fonctionnement en sous-traitance, ne sépare pas clairement les 
+					parties transfert de données vers la carte des parties de calcul pour pouvoir être sûr de ne mesurer que 
+					les calculs effectués sur le Knights Ferry.
+					\begin{figure}[!ht]
+					\begin{center}
+					\includegraphics[scale=0.5]{gflops_SGEMM.png}
+					\caption{Multiplication Matricielle}
+					\end{center}
+					\end{figure}
 			\begin{enumerate}
 			\item Knights Ferry
 				\begin{itemize}

@@ -623,7 +623,13 @@
 				de la carte à savoir comment démarrer le MIC, ou encore comment compiler un code pour la carte et les 
 				différents modes d'exécution. \newline
 				J'y ai également trouver la liste des outils indispensables comme le debuggeur ou encore un programme de
-				monitoring ainsi que plusieurs outils d'information et de configuration.
+				monitoring (voir figure 12) ainsi que plusieurs outils d'information et de configuration.
+				\begin{figure}
+				\begin{center}
+				\includegraphics[scale=0.40]{monitor_mic.png}
+				\caption{Monitoring MIC}
+				\end{center}
+				\end{figure}
 				\paragraph{Drivers}
 				La premiere chose à faire était donc l'installation de la carte et des drivers puis de vérifier le bon
 				fonctionement de la carte. Cette étape se déroula sans problème, en effet l'installation consisté en 
@@ -703,11 +709,11 @@
 					produit de deux vecteurs 512 bits (soit 16 floats) puis additionne tout les éléments du vecteur résultat.
 					Une seule instruction réalise donc 32 opérations simple précision.
 					Comme on exécute cette instruction pour les 32 registres, l'ensemble du code réalise 1024 opérations simple
-					précision (Voir figure 12). Ainsi les pipelines des processeurs sont bien remplis et tout les registres sont
+					précision (Voir figure 13). Ainsi les pipelines des processeurs sont bien remplis et tout les registres sont
 					utilisés. Ce code a permis d'atteindre 90.75\% de la performance crête théorique.
-					\begin{figure}[!ht]
+					\begin{figure}
 					\begin{center}
-					\includegraphics[scale=0.5]{assembleur.png}
+					\includegraphics[scale=0.40]{assembleur.png}
 					\caption{Assembleur}
 					\end{center}
 					\end{figure}
@@ -716,37 +722,98 @@
 					voir les performances pour des calculs matriciels. SGEMM et DGEMM (pour sa version double precision) sont 
 					des fonctions de multiplications de matrices très bien implémentées et optimisées dans les bibliothèques de 
 					calcul notemment dans la MKL (Maths Kernel Library) d'Intel. \newline
-					La première implémentation du test s'exécuter sur la machine hôte, et seule la partie de calcul était 
+					La première implémentation du test s'exécutait sur la machine hôte, et seule la partie de calcul était 
 					exécutée sur le MIC. Il était cependant difficil de pouvoir mesurer uniquement les temps de calculs. En effet
 					l'implémentation pour le MIC de ce type de fonctionnement en sous-traitance, ne sépare pas clairement les 
-					parties transfert de données vers la carte des parties de calcul pour pouvoir être sûr de ne mesurer que 
-					les calculs effectués sur le Knights Ferry.
-					\begin{figure}[!ht]
+					parties transfert de données vers la carte des parties de calcul. Il était donc difficil de mesurer uniquement 
+					les calculs effectués sur le Knights Ferry. \newline
+					La seconde version du test était donc complétement exécuté sur la carte. Pour pouvoir mieux visualiser
+					les performances, j'ai implémenté une fonction d'affichage graphique dans le code afin d'avoir instantanément
+					un résultat visuel (voir figure 14).
+					\begin{figure}
 					\begin{center}
-					\includegraphics[scale=0.5]{gflops_SGEMM.png}
+					\includegraphics[scale=0.4]{gflops_SGEMM.png}
 					\caption{Multiplication Matricielle}
+					\end{center}
+					\end{figure}
+					\subparagraph{}
+					Un autre composant important à tester est la mémoire. J'ai donc commencer le développement d'un test de mesure
+					de débit. Je me suis pour cela inspiré d'un code existant et qui consisté à faire des chargements mémoires
+					de données de taille croissante. Ainsi le débit de chaque niveau de mémoire pouvait être mesuré. Le code de base étant 
+					écrit en assembleur, il a tout d'abord fallu le réecrire pour utiliser les instructions propres au MIC. 
+					Malheureusement certaines instructions ne pouvaient pas être remplacées. En conservant les anciennes, le 
+					matériel n'etait pas complétement exploité, et les débits mesurés étaient très loin de ceux espérés.
+					J'ai donc réécrit le code en utilisant des intrinsics, et être ainsi sûr d'utiliser toutes les ressources
+					de la carte. Mais encore une fois les débits n'étaient pas ceux annoncés. Après analyse, il paru évident
+					qu'il n'était pas possible de saturer le débit mémoire en faisant travailler qu'un seul processeur.
+					J'ai donc exécuté le même programme sur plusieurs coeurs jusqu'a arriver a une limite supérieur, qui 
+					n'était plus très loin des débits théoriques (Voir figure 15). Cependant, contrairement aux tests sur 
+					Ivy Bridge (voir figure 16), les débits du cache sont erronés. Sans doute à cause du trop grand nombre 
+					de threads voulant accéder au cache, et qui sont donc pénalisés.
+					\begin{figure}
+					\begin{center}
+					\includegraphics[scale=0.33]{bandwidth_MICO3.png}
+					\caption{Bandwidth MIC}
+					\end{center}
+					\end{figure}
+					\begin{figure}
+					\begin{center}
+					\includegraphics[scale=0.33]{bandwidth_IVYO3.png}
+					\caption{Bandwidth Ivy Bridge}
+					\end{center}
+					\end{figure}
+					\subparagraph{}
+					Le deuxième métrique que l'on mesure généralement est la latence de la mémoire, à savoir le temps
+					nécessaire pour accéder à une mémoire donnée (voir figure 17).
+					\begin{figure}[!b]
+					\begin{center}
+					\includegraphics[scale=0.33]{latmem.png}
+					\caption{Latence MIC}
+					\end{center}
+					\end{figure}
+				\paragraph{Codes externes}
+				Parmi les codes provenant d'organisme client (Ministère de la défense) ou partenaire (CEA), j'ai eu l'occasion 
+				de travailler sur deux applications très différentes mais servant de mesure de référence pour évaluer les 
+				performances des machines dans des domaines très précis. L'un d'eux réalise des hachages cryptographique et donc
+				effectue des opérations sur des nombres entiers, alors que l'autre, est un programme de mécanique des fluide 
+				opérant sur des nombres flotants double précision.
+					\subparagraph{}
+					La fonction de hachage implémentée dans le programme cryptographique, a été portée sur différentes architectures 
+					pour tirer partie au mieux des ressources disponibles. Ainsi il existe une version non vectorisée, une version 64 bits (SSE) 
+					une version 128 bits (AVX), et une version 256 bits (AVX2). Le MIC travaillant sur des vecteurs 512 bits, 
+					il s'agissait donc de créer une version 512 bits et ainsi d'étudier les performances de la carte sur des 
+					opérations en nombre entier et de voir si le très grand nombre de coeurs de la carte est profitable à ce 
+					type d'algorithme. \newline
+					Après avoir compris l'organisation et le fonctionnement du programme, la tâche la plus délicate aura été
+					de trouver les informations utiles et nécessaires dans la documentation du MIC. En effet les opérations 
+					logiques et arithmétiques sont implémentées avec des intrinsics. Il aura fallu trouver les instructions 
+					équivalentes pour MIC et les remplacer (voir figure 18).
+					\begin{figure}
+					\begin{center}
+					\includegraphics[scale=0.5]{intrinsics.png}
+					\caption{Intrinsics MIC}
 					\end{center}
 					\end{figure}
 			\begin{enumerate}
 			\item Knights Ferry
 				\begin{itemize}
-				\item Lecture de doc
-				\item installation de driver
-				\item Portage de benchmark pour le MIC
+				\item Lecture de doc (ok)
+				\item installation de driver (ok)
+				\item Portage de benchmark pour le MIC (ok)
 					\begin{itemize}
-					\item Bench élémentaire interne à l'équipe (C)
-					\item SpecInt et SpecOMP (perl, C)
+					\item Bench élémentaire interne à l'équipe (C) (ok)
+					\item SpecInt et SpecOMP (perl, C) (ok)
 					\end{itemize}
-				\item Ecriture de mes propres tests de performances
+				\item Ecriture de mes propres tests de performances (en cours)
 					\begin{itemize}
-					\item tests FLOPS pur (assembleur, C)
-					\item portage de DGEMM et SGEMM (C)
-					\item test bande passante
-					\item test latence mémoire
+					\item tests FLOPS pur (assembleur, C) (ok)
+					\item portage de DGEMM et SGEMM (C) (ok)
+					\item test bande passante (ok)
+					\item test latence mémoire (en cours)
 					\end{itemize}
 				\item Portage code existant
 					\begin{itemize}
-					\item tsha (assembleur, C)
+					\item tsha (assembleur, C) (en cours)
 					\item Hydro (C)
 					\end{itemize}
 				\item Ecriture de doc (wiki)

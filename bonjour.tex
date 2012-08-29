@@ -611,18 +611,18 @@
 				d'un accélérateur assez similaire à un GPU dans le sens où l'on peut exécuter des noyaux de calcul sur la 
 				carte afin d'accélerer les programmes. La mission principale était de comprendre le fonctionnement de cette
 				carte, d'en évaluer dans un premier temps les performances théoriques puis dans un deuxième temps les 
-				performances réelles sur des programmes de tests. D'une manière plus générale toutes les connaissances ont
+				performances réelles sur des programmes de tests. Aussi, toutes les connaissances et touts les résultats ont 
 				été systématiquement reportées sur un wiki interne.
 				\paragraph{Documentation}
-				Ce materiel étant nouveau et encore dans une version d'Alpha, son fonctionnement tant au niveau harware que
-				software était encore inconnu. Il aura donc fallu avant tout lire la documentation fournie. Ceci me permi de 
-				connaître les propriétés harware de la carte, comme le nombre de coeurs, de threads par coeur ou encore 
-				la taille des registres. Ce travail fut indispensable pour estimer les performances théoriques de la carte 
-				et de pouvoir coroborer les performances observées avec le matériel. \newline
+				Ce materiel étant nouveau et encore dans une version d'Alpha, son fonctionnement tant au niveau hardware que
+				software était encore inconnu. Il aura donc fallu avant tout lire la documentation fournie. Ceci m'a permi de 
+				connaître les propriétés hardware de la carte, comme le nombre de coeurs, de threads par coeur ou encore 
+				la taille des registres. Ce travail a été indispensable pour estimer les performances théoriques de la carte 
+				et pouvoir coroborer les performances observées avec le matériel. \newline
 				J'ai également pu noter la procédure d'installation des drivers, et de manière générale l'utilisation
 				de la carte à savoir comment démarrer le MIC, ou encore comment compiler un code pour la carte et les 
 				différents modes d'exécution. \newline
-				J'y ai également trouver la liste des outils indispensables comme le debuggeur ou encore un programme de
+				J'y ai également trouvé la liste des outils indispensables comme le debuggeur ou encore un programme de
 				monitoring (voir figure 12) ainsi que plusieurs outils d'information et de configuration.
 				\begin{figure}
 				\begin{center}
@@ -631,32 +631,34 @@
 				\end{center}
 				\end{figure}
 				\paragraph{Drivers}
-				La premiere chose à faire était donc l'installation de la carte et des drivers puis de vérifier le bon
-				fonctionement de la carte. Cette étape se déroula sans problème, en effet l'installation consisté en 
-				l'exécution d'un simple script python, et les outils fourni m'on permis de constater que la carte était
+				La premiere chose à faire a donc était l'installation de la carte et des drivers puis de vérifier le bon
+				fonctionement de la carte. Cette étape s'ai déroulé sans problème, en effet l'installation consistait en 
+				l'exécution d'un simple script python, et les outils fourni m'ont permi de constater que la carte était
 				correctement installée et reconnue.
 				\paragraph{Benchmark pour le MIC}
-				Dès lors, le but était de pouvoir évaluer les performance de l'accélerateur tels que le débit mémoire,
+				Dès lors, le but était de pouvoir évaluer les performances de l'accélerateur tels que le débit mémoire,
 				la puissance de calcul, les latences etc.. \newline
 				Il existe de nombreux programmes de benchmark disponibles, l'idée était donc de porter les tests en notre
-				possession sur le MIC ce qui dans un premier temps était peut-être moins adapté au hardware particulier
-				de la carte mais nous permettrait d'appéhender le matériel et d'obtenir des résultats plus rapidement 
+				possession sur le MIC, ce qui dans un premier temps était peut-être moins adapté au hardware particulier
+				de la carte, mais nous permettrait d'appéhender le matériel et d'obtenir des résultats plus rapidement 
 				que s'il avait fallu écrire des tests spécifiques au MIC.
 					\subparagraph{}
-					L'équipe avait un ensemble de tests, écrit en C, pour annalyser les performances d'un machine sur chacun de ses 
-					composants. Il m'a donc était demandé de porter ses tests pour le MIC. \newline
+					L'équipe avait donc un ensemble de tests, écrit en C, pour annalyser les performances d'une machine sur 
+					chacun de ses composants. Il m'a donc était demandé de porter ses tests pour le MIC. \newline
 					Contrairement au GPU classique NVidia ou AMD, des codes en C ou FORTRAN existant peuvent directement
 					s'exécuter sur le MIC si le bon flag a été donnée à la compilation. Ceci rend le portage de code
 					simple et rapide. De cette manière le programme se lance, et s'exécute intégralement sur la carte
 					sans interaction avec l'hôte.\newline
 					La plus grosse difficulté a donc été de compiler correctement ces tests. Il aura fallu pour cela editer 
 					les Makefile inclure les bon headers et correctement linker les différentes bibliothèques spécifiques au 
-					MIC. \newline
-					(Parler des résultats?)
+					MIC. (Rajouter qu'au départ, plusieurs bench ne se compilaient même pas, que d'autres se compiler, 
+					mais ne se lancer pas sur le MIC, à cause de lib dynamique manquante, mais surtout du manque de 
+					connaissance sur le fonctionnement de la carte. D'autres tests s'exécutaient, mais donnaient des résultats 
+					plus que douteux. Finalement, certains se sont avéraient bien utils) \newline
 					\subparagraph{}
 					Parmi les programmes de tests standard qui permettent de classifier les différentes machines SpecINT et 
 					SpecFP sont parmis les plus souvent utilisés. Il a donc semblé intéressant de les exécuter sur le MIC
-					afin de pouvoir le comparer à d'autre solution de calcul. \newline
+					afin de pouvoir comparer la carte à d'autre solution de calcul. \newline
 					CPU2000 est un ensemble de benchmark conçu pour tester les performances des CPU des serveurs. Le programme
 					est écrit princpalement en perl, bash et C. Les tests en eux mêmes sont écrits en C et C++, et Il est 
 					divisé en deux parties: CINT2000 et CFP2000 pour la partie flotante simple précision. \newline
@@ -664,12 +666,12 @@
 					\begin{description}
 					\item[Compilation :]
 						Les différents programmes de test sont compilés, et les paramètres sont donnés à l'aide d'un fichier
-						de configuration éditer au préable pour la machine sur laquelle doit être exécuter SPECInt
+						de configuration édité au préable pour la machine sur laquelle doit être exécuté SPECInt
 					\item [Configuration :]
 						Etant donné les tests à exécuter et les paramètres choisis (taille des données en entré, type de test
 						à effectuer) les différents benchs sont paramétrés.
 					\item [Exécution :]
-						Les tests sont effectués, et sont mesurés grace à un binaire "specinvoke".
+						Les tests sont effectués, et sont mesurés grace à un binaire nomé "specinvoke".
 					\item [Résultat :]
 						Les résultats des tests sont compilés, et plusieurs fichiers de sortis sont créés (html, asc etc...)
 						pour résumer les performances.
@@ -690,10 +692,9 @@
 					\subparagraph{}
 					Une fois SPECInt fonctionnel pour MIC, l'interêt a donc été de le comparer à un processeur généraliste
 					de type Sandy Bridge, mais surtout d'en analyser les résultats et d'en comprendre les raisons.
-					(Est ce que je peux détailler?)
+					(Expliquer la démarche de comparaison sans entrer dans les résultats)
 					\subparagraph{}
 					SPECOMP!
-					(Résultats?)
 				\paragraph{Tests de performances}
 				Pour étudier plus finement les performances il fallu écrire des tests moins généralistes et plus spécifiques
 				à certaine partie de la carte, comme le processeur ou la mémoire.
@@ -787,13 +788,97 @@
 					Après avoir compris l'organisation et le fonctionnement du programme, la tâche la plus délicate aura été
 					de trouver les informations utiles et nécessaires dans la documentation du MIC. En effet les opérations 
 					logiques et arithmétiques sont implémentées avec des intrinsics. Il aura fallu trouver les instructions 
-					équivalentes pour MIC et les remplacer (voir figure 18).
+					équivalentes pour MIC et les remplacer (voir figure 18). \newline
+					Les tests ont ensuite consistés à comparer les performances en fonction du nombre de coeurs utilisés, et 
+					aussi en comparaison avec des processeurs généralistes de type Westmere ou Sandy Bridge.
 					\begin{figure}
 					\begin{center}
 					\includegraphics[scale=0.5]{intrinsics.png}
 					\caption{Intrinsics MIC}
 					\end{center}
 					\end{figure}
+					\subparagraph{}
+					Le code d'Hydro (un programme de calcul de mécanique des fluides) nous a été fourni par le CEA initialement 
+					dans le cadre du projet OpenGPU qui sera développé plus tard. Ce code servant à comparer les performances 
+					entre CPU et GPU Nvidia, il nous a paru intéressant de le porter également sur MIC et avoir ainsi une 
+					comparaison entre trois solutions de calculs différentes sur un code industrielle. \newline
+					Deux version du programme existait : \newline
+					\begin{itemize}
+					\item Une version en C pour CPU
+					\item Une version en CUDA pour GPU Nvidia \newline
+					\end{itemize}
+					Je me suis donc basé sur la version CPU pour faire tout d'abord un portage simple vers le MIC et l'exécuter 
+					en mode natif, c'est-à-dire entièrement sur la carte et de manière autonome. Même s'il semblait évident 
+					que les performances seraient mauvaises avec ce type d'exécution (OS basique, gestion de la mémoire et des 
+					threads, quantité de mémoire) celà permettait néanmoins de vérifier que ce code pourrait fonctionner sur la 
+					carte. \newline
+					La seconde étape était d'écrire le code à la manière de CUDA, c'est-à-dire en sous-traitant les noyaux de 
+					calcul à la carte et en laissant la machine hôte s'occuper de la gestion des entrées-sorties, des fichiers et 
+					des allocations mémoires. Il fallait pour cela analyser le code et trouver les point-chauds, autrement dit 
+					les parties de code où le programme passe le plus de temps à calculer. Grâce à ses nombreux coeurs de calcul, 
+					le Knights Ferry devrait permettre d'accélerer les calculs comparé à un processeur généraliste. Le concept 
+					était donc pour les parties de calcul, de transférer les données sur la carte, d'effectuer les calculs sur 
+					cette dernière et de renvoyer les résultats vers l'hôte. Malheureusement les résultats n'étaient pas 
+					convaincants et même en dégradation comparés à une exécution classique sur CPU. Il y avait plusieurs raisons 
+					à celà : \newline
+					\begin{itemize}
+					\item Tout d'abord la carte étant une version Alpha du produit, comme annoncé par Intel les performances 
+					en calcul flotant double précision étaient très mauvaises. Malgré le nombre de coeurs de calcul élevé, 
+					la carte était moins rapide qu'une lame Inca 3.
+					\item Le seconde raison pour expliquer ces performances est le débit du port PCI-express. En effet le MIC 
+					partageait le port PCI-express avec une carte graphique pour l'affichage et le débit était donc deux fois 
+					inférieur au débit maximum. Les données transférées entre l'hôte et la carte faisant plusieurs 
+					centaines de MégaOctets, un temps considérable était perdu en transfert de données. \newline
+					\end{itemize}
+					Pour tenter de palier au premier problème, la possibilité de passer les données en simple précision a été 
+					implémenté. Les performances se sont alors nettement améliorées, cependant, les temps de transfert restés trop 
+					important pour espérer pouvoir être plus performant qu'un GPU, ou même qu'un CPU. \newline
+					Les améliorations envisagées pour tenter d'optimiser les transferts n'ont pas abouties, en effet celà aurait 
+					nécessité de réécrire de grosses parties du programme et cette option n'etait pas envisageable en temps.
+				\paragraph{Outils}
+					Jusqu'alors, l'ensemble des développements avaient été fait dans un but d'évaluer les performances du MIC. 
+					Afin de s'assurer que le MIC fonctionnait correctement, et pour aller plus loin que les tests fourni par 
+					Intel qui se contentaient simplement de vérifier que la carte était reconnue, il m'a été demandé de 
+					developper deux tests : \newline
+					\begin{itemize}
+					\item Un premier test pour évaluer le debit du port PCI-express.
+					\item Et un deuxième pour s'assurer qu'aucune erreur n'était introduite lors des transferts entre
+					l'hôte et la carte.
+					\end{itemize}
+					\subparagraph{}
+					Encore une fois, plusieurs approches ont été possibles pour réaliser un test de débit du port PCI-express.
+					Le procédure globale du test étant de créer un buffer de taille paramétrable, et de l'envoyer de l'hôte 
+					vers le MIC, puis du MIC vers l'hôte, et de mesurer le temps qui aura été nécessaire afin de calculer le 
+					débit dans chacun des sens. La fonction de mesure du temps utilisée est \emph{gettimeofday}. Cette fonction 
+					mesure le nombre de secondes et microsecondes écoulées depuis le 1er Janvier 1970 minuit. Ainsi, en faisant 
+					deux appels à cette fonction, l'un au début de la partie à mesurer, et l'autre à la fin, nous pouvons en 
+					soustrayant les deux résultats obtenir le nombre de secondes écoulées.\newline
+					Ainsi dans la version intiale, l'hôte relevé l'heure lors du début du transfert vers le MIC, et le MIC relevé 
+					à son tour l'heure lorsqu'il avait fini de recevoir les données. Seulement voilà, les débits mesurés étaient 
+					tous négatifs. La raison à celà : une heure totalement erronée sur l'OS du MIC et surtout différente de celle 
+					sur l'hôte. Rien ne pouvant assurer que les deux heures soient identiques, et le test se voulant le plus 
+					simple possible à mettre en place, (en évitant de demander à l'utilisateur de configurer l'heure sur le MIC) 
+					les mesures ont été faites différemment : \newline
+					l'hôte fait toujours appel à \emph{gettimeofday} avant le début des transferts, mais aussi apres les 
+					transferts (voir figure 19).
+					\begin{figure}
+					\begin{center}
+					\includegraphics[scale=0.5]{code.png}
+					\caption{Mesure temps transfert CPU vers MIC}
+					\end{center}
+					\end{figure}
+					Celà est possible uniquement grâce aux communications asynchrones. C'est-à-dire que l'hôte ne reprend la main 
+					sur le programme que lorsque la communication est terminée. Ainsi on est sûr d'avoir relevé l'heure qu'une 
+					fois les transferts terminés et pas avant. Enfin le programme est paramétrable, on peut choisir la taille 
+					des buffers, le nombre de transfert à effectuer et une limite de temps à ne pas dépasser (voir figure 20).
+					\begin{figure}
+					\begin{center}
+					\includegraphics[scale=0.4]{bwtest.png}
+					\caption{Mesure débit PCIe avec un buffer de 100Mo, et 10 transferts}
+					\end{center}
+					\end{figure}
+					\subparagraph{}
+					Test fiabilité PICe
 			\begin{enumerate}
 			\item Knights Ferry
 				\begin{itemize}
@@ -813,14 +898,14 @@
 					\end{itemize}
 				\item Portage code existant
 					\begin{itemize}
-					\item tsha (assembleur, C) (en cours)
-					\item Hydro (C)
+					\item tsha (assembleur, C) (ok)
+					\item Hydro (C) (ok)
 					\end{itemize}
-				\item Ecriture de doc (wiki)
+				\item Ecriture de doc (wiki) (derniere partie)
 				\item Outils
 					\begin{itemize}
-					\item Test débit port PCIe (C)
-					\item Test fiabilité port PCIe (C)
+					\item Test débit port PCIe (C) (ok)
+					\item Test fiabilité port PCIe (C) (en cours)
 					\end{itemize}
 				\end{itemize}
 				( Présenter quelque résultats ! confidantialité!! ! )

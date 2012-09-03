@@ -1,10 +1,14 @@
-\documentclass{article}
+\documentclass[11pt]{article}
 
 \usepackage[utf8]{inputenc} % un package
-\usepackage[T1]{}      % un second package
+\usepackage[T1]{fontenc}      % un second package
 \usepackage[francais]{babel}  % un troisième package
+\usepackage{lmodern}
 \usepackage{fancyhdr}
 \usepackage{wrapfig}
+\usepackage{slashbox}
+\usepackage{array}
+\usepackage{multirow}
 \usepackage{graphicx}
 \usepackage[left=2cm, right=2cm]{geometry}
 
@@ -30,23 +34,34 @@
 \part{Remerciements}
 	Avant tout développement sur cette expérience professionnelle, il apparaît opportun de commencer ce rapport de stage par 
 	des remerciements, à ceux qui m'ont beaucoup appris au cours de ce stage et même à ceux qui ont eu la gentillesse de faire 
-	de ce stage un moment très profitable. Aussi, je remercie tous les membres de l'équipe, et plus particulièrement 
-	Gaetan Bayle et Jean-François Lemerre, qui m'ont formé et accompagné tout au long de cette expérience professionnelle 
-	avec beaucoup de patience et de pédagogie.
+	de ce stage un moment très profitable. Aussi, je remercie plus particulièrement mon responsable de stage, Jean-François Lemerre, 
+	qui a été très disponible quelque soit mon problème pour m'aider lors de mon stage et ceci en me laissant toute mon 
+	indépendance. \newline
+	Je souhaite également remercier tous les membres de l'équipe performance (Marc, Isabelle, Alain et Gaetan) pour leur assistance 
+	aussi bien morale que technique et leur bonne humeur quotidienne. \newline
+	Enfin, tout merci à Jean-Thomas acquaviva, qui m'a aidé à trouver ce stage.
 
 \newpage
 \rhead{Introduction}
 \part{Introduction}
-	Du 1er avril au 30 septembre 2012, j’ai effectué un stage au sein de l’entreprise Bull située au Clayes-sous-bois 
+	Ce stage est l'aboutissement d'un cursus universitaire commencé il y a cinq ans. Le projet de fin
+	d'études dure 6 mois et est l'occasion d'acquérir une expérience professionnelle après deux ans
+	de Master passés à l'Université de Versailles pour la première année, et à l'Ecole Centrale de Paris pour la deuxième. \newline
+
+	C'est avec un grand intérêt que j’ai effectué un stage du 1er avril au 30 septembre 2012, au sein de l’entreprise Bull située au Clayes-sous-bois 
 	dans les Yvelines. Bull étant un acteur important dans le domaine du calcul haute performance, j'ai naturellement 
 	était très enthousiaste à l'idée d'y faire mon stage. Le poste proposé permettait d'étudier les performances de 
 	l'accélérateur d'Intel (MIC) et d'autres GPUs de Nvidia ou AMD. Il était aussi question de travailler sur le projet 
-	OpenGPU en partenariat avec l'école centrale de Paris. Ce stage correspondait donc parfaitement à ma formation et 
+	OpenGPU en partenariat entre autres avec l'école centrale de Paris. Ce stage correspondait donc parfaitement à ma formation et 
 	l'étude des performances est un domaine que j'apprécie et sur lequel j'ai aussi eu l'occasion de travailler lors de 
-	mon précedent stage au laboratoire Exascale.
-	[Ici présenter de manière globale l'entreprise qui sera plus détaillée dans la partie 1]
-	Au cours de ce stage au département R\&D dans l'équipe performance, j’ai pu m’intéresser aux accélérateurs tel que les GPU... 
-	[parler rapidement de la mission de mon stage qui sera plus détaillée dans la partie 2]
+	mon précedent stage au laboratoire Exascale. \newline
+	
+	Ce rapport va présenter l'ensemble de mon stage en trois parties majeures. Nous commencerons par une description de l'entreprise, 
+	dans laquelle je présenterai un historique et l'organisation de Bull et j'y détaillerai également ses secteur d'activités principaux.
+	Je présenterai ensuite dans une seconde partie, l'équipe dans laquelle j'ai effectué mon stage en y expliquant son rôle au sein de Bull 
+	et son fonctionnement.
+	Enfin nous nous attarderons sur la partie plus technique qui détaillera les travaux sur la mesure de performances de l'accélerateur 
+	d'Intel et les moyens mis en oeuvre pour y arriver, et également les tâches effectuées dans le cadre du projet OpenGPU.
 
 \newpage
 \rhead{L'entreprise et son secteur d'activité}
@@ -553,19 +568,84 @@
 		pour objectif de positionner Bull sous trois ans comme un leader européen des systèmes numériques critiques et de 
 		mettre le Groupe sur le chemin d’une croissance rentable.
 		\subsection{Organisations}
-		La société [•] regroupe [ effectif / nombre ] d’employés (on compte environ [•] employés au sein de la société [•] 
-		dans le monde), qui sont divisés en [•] départements, tous sous la direction du Président-directeur général, [•]: 
-		Bull est organisé en quatre grande partie appelées Bussiness Lines
+		Bull regroupe plus de 9000 d’employés (on compte environ [•] employés dans les locaux des Clayes-sous-bois), et est 
+		présent dans plus de 50 pays. Son chiffre d'affaire atteind en 2011 1.30 Milliard d'Euros. Le groupe s'organise en 
+		quatre départements appelés Bussiness Lines, tous sous la direction du Président-directeur général, Philippe Vannier.
+		\begin{figure}[h!]
+		\begin{minipage}[b]{0.5\linewidth}
+		\centering \includegraphics[scale=0.5]{profil2012_ca_fr.jpg}
+		\caption{\it Chiffre d'affaire}
+		\end{minipage}\hfill
+		\begin{minipage}[b]{0.5\linewidth}
+		\centering \includegraphics[scale=0.5]{profil2012_effectifs_fr.jpg}
+		\caption{\it Effectifs}
+		\end{minipage}
+		\end{figure}
 		\subsubsection{Security Solutions}
+		Pour les entreprises comme pour les administrations, notre environnement connecté, dématérialisé, mobile, 
+		\og en nuage \fg, est porteur d’opportunités mais aussi de menaces nouvelles. Multiformes et imprévisibles, aux conséquences 
+		directes et indirectes de plus en plus lourdes, les enjeux majeurs de sécurité et de souveraineté se concentrent sur 
+		quatre fronts : l’information numérique, les systèmes critiques, les sites sensibles et les territoires. Acteur 
+		européen de référence de la haute sécurité informatique et électronique, Bull Security Solutions intervient sur ces 
+		quatre domaines, où garantir une sécurité optimale, stricte mais agile, requiert expertise, rigueur et innovation. 
+		S’appuyant sur ses capacités complémentaires de conseil et de mise en œuvre, Bull Security Solutions développe de 
+		bout en bout des solutions de haute sécurité, intégrées et sur mesure, associant étroitement dispositifs physiques, 
+		logiques et électroniques. Capable d’appréhender les risques dans toute leur complexité mais aussi les spécificités 
+		de chaque situation, Bull Security Solutions développe une approche à la fois globale et spécialisée de la sécurité, 
+		et s’impose comme le partenaire de confiance de ses clients.
 		\subsubsection{Business Integration Solutions}
+		À travers les procédures dématérialisées, les solutions décisionnelles ou les applications mobiles, la technologie 
+		est de plus en plus étroitement intégrée aux métiers. Agile, évolutive, l’informatique participe à la transformation 
+		rapide des produits et des processus, et devient un puissant facteur de différenciation et de création de valeur. 
+		Spécialiste des processus complexes, des environnements hétérogènes et des systèmes critiques, Bull Business 
+		Integration Solutions aide ses clients à imaginer, concevoir, mettre en œuvre et faire vivre les solutions innovantes 
+		qui leur permettront de tirer pleinement parti des nouveaux outils et des nouveaux usages. S’appuyant sur sa 
+		connaissance approfondie de ses clients et de leur secteur, la Business Line développe de bout en bout des solutions 
+		sur mesure, clés en main, adaptées aux spécificités, aux priorités et aux contraintes de chaque organisation. Fort de 
+		sa stratégie d’industrialisation, de focalisation et de réplication de ses savoir-faire, Bull Business Integration 
+		Solutions apporte à ses clients des compétences métiers rares et les accompagne en toute sécurité dans leurs projets 
+		de transformation vers le Cloud, la mobilité et le Big Data.
 		\subsubsection{Computing Solutions}
+		Pour permettre aux entreprises et aux administrations de se concentrer sur leur cœur de métier, le socle technique, 
+		sur lequel reposent leurs systèmes numériques, est appelé à évoluer. Plus que jamais, les fondations matérielles et 
+		logicielles doivent garantir performance et sécurité, faciliter utilisation et innovation, et contribuer aux enjeux 
+		globaux de l’organisation (maîtrise des coûts, politique environnementale…). Architecte, intégrateur et opérateur 
+		d’infrastructures numériques critiques, Bull Computing Solutions accompagne la transformation des data centers, 
+		notamment vers le Cloud computing. S’appuyant sur les technologies du Groupe et celles de partenaires reconnus 
+		(EMC, Microsoft, Oracle, SAP, VMware…), Bull Computing Solutions réunit des capacités de conseil (Bull Advisory 
+		Services), d’intégration (serveurs, stockage, réseaux…) et d’infogérance (Bull Managed Services) qui lui permettent 
+		de concevoir, bâtir et exploiter des systèmes sûrs et agiles, parfaitement adaptés à l’activité, aux usages, aux 
+		contraintes et à la stratégie de ses clients. Autant d’atouts et de savoir-faire qui font de Bull Computing Solutions 
+		un partenaire de confiance à haute valeur ajoutée.
 		\subsubsection{Innovative products}
-		Au sein de cette société de taille [•], il est aisé de percevoir l’interaction constante entre les différents 
-		services décrits plus haut. On distingue [•] circuits de création de richesse suivant qu’il procède [•] ou de [•].
-	\section{Le secteur d'activité}
+		Affiner la précision des simulations, accroître le nombre de paramètres, élargir les échantillons, les historiques et 
+		les sources de données analysées, accélérer les traitements jusqu’au temps réel… Qu’il s’agisse d’applications 
+		scientifiques, décisionnelles ou de gestion, la puissance de calcul conditionne partout la capacité d’innovation. 
+		Seul constructeur européen, Bull se positionne sur les marchés de la très haute puissance et libère l’ambition de ses 
+		clients. Avec ses solutions d’Extreme Computing, autour des supercalculateurs bullx, Bull apporte aux centres de 
+		recherche, aux bureaux d’étude des grands groupes et aux PME innovantes la maîtrise d’un leader des technologies 
+		pétaflopiques. Mesuré plus rapide serveur x86 au monde, bullion s’impose comme le serveur de choix du Cloud privé et 
+		des environnements critiques. Enfin, pour pérenniser l’investissement et valoriser le capital informationnel de ses 
+		grands clients, Bull fait évoluer ses plates-formes GCOS de façon à concilier puissance, ouverture et flexibilité. 
+		S’appuyant sur l’excellence de sa R\&D et de ses ressources industrielles, Bull Innovative Products conçoit et 
+		fabrique les systèmes de pointe qui relèvent le défi de la puissance.
+	\section{Secteurs d'activités}
 		\subsection{Présentation}
-		les concurrents, les besoins des consommateurs... \newline
-		Quatre secteurs de prédilections : 
+		Bull réalise près de 50\% de son chiffre d'affaires à l'international. La vitalité des marchés à fort potentiel, tels 
+		que l'Amérique latine, ainsi que l'activité apportée par l'acquisition en Egypte, expliquent la croissance de 9\% du chiffre 
+		d'affaires réalisée hors d'Europe. \newline
+		A ses compétences technologiques et d'intégration, Bull allie des savoir-faire sectoriels qui lui permettent de développer 
+		des solutions innovantes et sur-mesure, adaptées au contexte de chacun de ses clients.
+		\begin{figure}[h!]
+		\begin{minipage}[b]{0.5\linewidth}
+		\centering \includegraphics[scale=0.5]{profil2012_ca_repartition_fr.jpg}
+		\caption{\it Géographique}
+		\end{minipage}\hfill
+		\begin{minipage}[b]{0.5\linewidth}
+		\centering \includegraphics[scale=0.5]{profil2012_ca_repartitionsecteur_fr.jpg}
+		\caption{\it Par secteurs}
+		\end{minipage}
+		\end{figure}
 			\subsubsection{Secteur public}
 			\subsubsection{Finance}
 			\subsubsection{Défense}
@@ -578,11 +658,17 @@
 \rhead{Le cadre du stage}
 \part{Le cadre du stage}
 	\section{L'équipe}
-	Equipe performance secteur R\&D (6 puis 5 membres cause départ Gaetan) \newline
-	Organigramme à présenter si possible. \newline
-	Expliquer le rôle de l'équipe.
+	Equipe performance dans le section SDD (server design and development) du département innovative products. L'équipe était 
+	à mon arrivé composée de 6 personnes moi y compris:
+	\begin{itemize}
+	\item Jean-François Lemerre
+	\item Alain Chasles
+	\item Marc Simon
+	\item Isabelle Cabello
+	\item Gaetan Bayle des courchamps
+	\end{itemize}
+	Fin Juillet, le contrat de Gaetan prenait fin.
 	\section{Fonctionnement}
-	??
 
 \newpage
 \rhead{Travaux effectués et apports du stage}
@@ -601,7 +687,30 @@ ou d'en améliorer d'autres.
 		\begin{itemize}
 		\item Ordinateur personnel (descriptif).
 		\item Ordinateur, qui contenait l'accélérateur Intel (descriptif).
-		\item Serveurs de calcul bull (description des lames... tableaux etc...).
+		\item Serveurs de calcul bull (description des lames... tableaux etc...). \newline
+		\begin{tabular}{|c|c|c|c|}
+		\hline
+		\backslashbox{Caractéristiques}{Modèles} & B500 & B505 & B510 \\
+		\hline
+		Chassis & Simple largeur & Double largeur & Double largeur \\
+		\hline
+		\multirow{2}*{Processeur} & \multirow{2}*{2 processeurs hexa coeur} & & \\
+		\cline{3-4}
+		& Intel Xeon 56xx jusqu’à 3,06GHz & & \\
+		\hline
+		Chipset & & & \\
+		\hline
+		Mémoire & & & \\
+		\hline
+		Stockage & & & \\
+		\hline
+		Chassis & & & \\
+		\hline
+		Réseau & & & \\
+		\hline
+		OS & & & \\
+		\hline
+		\end{tabular}
 		\item Accès au Knights Corner d'Echirolles (description machines echirolles).
 		\end{itemize}
 		\subsection{Les missions}
@@ -612,7 +721,7 @@ ou d'en améliorer d'autres.
 				carte afin d'accélérer les programmes. La mission principale aura donc était de comprendre le fonctionnement de cette
 				carte, d'en évaluer dans un premier temps les performances théoriques puis dans un deuxième temps les 
 				performances réelles sur des programmes de tests. De plus, toutes les connaissances et tous les résultats ont 
-				été systématiquement reportées sur un wiki interne.
+				été systématiquement reportés sur un wiki interne.
 				\begin{figure}
 				\begin{center}
 				\includegraphics[scale=0.75]{IntelMIC.jpg}
@@ -751,9 +860,9 @@ ou d'en améliorer d'autres.
 					des fonctions de multiplications de matrices très bien implémentées et optimisées dans les bibliothèques de 
 					calcul notemment dans la MKL (Maths Kernel Library) d'Intel. \newline
 					La première implémentation du test s'exécutait sur la machine hôte et seule la partie de calcul était 
-					exécutée sur le MIC. Il était cependant difficil de pouvoir mesurer uniquement les temps de calculs. En effet
+					exécutée sur le MIC. Il était cependant difficile de pouvoir mesurer uniquement les temps de calculs. En effet
 					l'implémentation pour le MIC de ce type de fonctionnement en sous-traitance, ne sépare pas clairement les 
-					parties transfert de données vers la carte des parties de calcul. Il était donc difficil de mesurer uniquement 
+					parties transfert de données vers la carte des parties de calcul. Il était donc difficile de mesurer uniquement 
 					les calculs effectués sur le Knights Ferry. \newline
 					La seconde version du test était donc complètement exécuté sur la carte. Pour pouvoir mieux visualiser
 					les performances, j'ai implémenté une fonction d'affichage graphique dans le code afin d'avoir instantanément

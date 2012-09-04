@@ -10,7 +10,26 @@
 \usepackage{array}
 \usepackage{multirow}
 \usepackage{graphicx}
+\usepackage{hyperref}
 \usepackage[left=2cm, right=2cm]{geometry}
+
+\hypersetup{
+	backref=true, %permet d'ajouter des liens dans...
+	pagebackref=true, %...les bibliographies
+	hyperindex=true, %ajoute des liens dans les index.
+	colorlinks=true, %colorise les liens
+	urlcolor= blue, %couleur des hyperliens
+	linkcolor= blue, %couleur des liens internes
+	bookmarks=true, %créé des signets pour Acrobat
+	bookmarksopen=true, %si les signets Acrobat sont créés,
+						%les afficher complètement.
+	bookmarksnumbered=true,
+	pdfpagemode=UseOutlines,
+	pdftitle={Rapport de stage}, %informations apparaissant dans
+	pdfauthor={Chadi AKEL}, %dans les informations du document
+	pdfsubject={Stage Bull} %sous Acrobat.
+}
+
 
 \title{Rapport de stage}
 \author{Chadi \bsc{AKEL}}
@@ -27,7 +46,11 @@
 \newpage
 \rhead{Sommaire}
 \renewcommand{\contentsname}{Sommaire}
+%\renewcommand{\includegraphics}{Figure}
 \tableofcontents
+
+\newpage
+\listoffigures
 
 \newpage
 \rhead{Remerciements}
@@ -557,8 +580,9 @@
 		\paragraph{}
 		\begin{bf}Novembre 2010\end{bf} : le \begin{bf}supercalculateur Tera-100 du CEA se classe à la 6ème place mondiale\end{bf} 
 		avec 1,05 pétaflops sur Linpack et 1,25 en puissance crête théorique. C'est le tout premier calculateur européen à 
-		\begin{wrapfigure}[7]{l}{3.5cm}
+		\begin{wrapfigure}[8]{l}{3.5cm}
 		\includegraphics{tera_100.jpg}
+		\caption{\small{\it{Tera 100}}}
 		\end{wrapfigure}
 		passer la barre symbolique du pétaflops et il est constitué de 4 370 serveurs bullx pour un total de 17 480 processeurs 
 		octo-cœurs Intel Xeon 7500 (près de 140 000 cœurs en tout). Le chiffre d’affaires est de 1,25 milliard d’euros, 
@@ -567,68 +591,110 @@
 		Le plan stratégique BullWay 2011-2013, annoncé \begin{bf}fin 2010\end{bf} par son nouveau PDG Philippe Vannier, a 
 		pour objectif de positionner Bull sous trois ans comme un leader européen des systèmes numériques critiques et de 
 		mettre le Groupe sur le chemin d’une croissance rentable.
+		\newpage
 		\subsection{Organisations}
 		Bull regroupe plus de 9000 d’employés (on compte environ [•] employés dans les locaux des Clayes-sous-bois), et est 
 		présent dans plus de 50 pays. Son chiffre d'affaire atteind en 2011 1.30 Milliard d'Euros. Le groupe s'organise en 
-		quatre départements appelés Bussiness Lines, tous sous la direction du Président-directeur général, Philippe Vannier.
+		quatre départements appelés Business Lines, tous sous la direction du Président-directeur général, Philippe Vannier.
 		\begin{figure}[h!]
 		\begin{minipage}[b]{0.5\linewidth}
 		\centering \includegraphics[scale=0.5]{profil2012_ca_fr.jpg}
-		\caption{\it Chiffre d'affaire}
+		\caption{\it Chiffre d'affaire Bull 2011}
 		\end{minipage}\hfill
 		\begin{minipage}[b]{0.5\linewidth}
 		\centering \includegraphics[scale=0.5]{profil2012_effectifs_fr.jpg}
-		\caption{\it Effectifs}
+		\caption{\it Effectifs Bull 2011}
 		\end{minipage}
 		\end{figure}
+		\subsubsection{Organigramme}
+		\begin{figure}[h!]
+		\centering \includegraphics[scale=0.4]{organigramme.png}
+		\caption{\it Organigramme Bull}
+		\end{figure}
+		\subsection{Business Lines}
+		Les Business Lines ont la responsabilité de définir la stratégie de Bull sur les marchés 
+		dont elles ont la charge - avec la contribution de la Direction Stratégie \& Marketing - 
+		c’est-à-dire la politique produits/solutions/services, la politique d’offre, la politique R\&D, 
+		la politique  d’investissement technique et industrielle du Groupe dans leur domaine, 
+		dans le respect des objectifs de rentabilité et de croissance fixés par le Comex. \newline
+		Les Business Lines ont en charge de définir les règles et les processus globaux et de les 
+		faire appliquer dans chacun des pays. \newline
+		Les BLs fixent, avec les pays / zones géographiques, la politique commerciale, le go-to-market et définissent avec 
+		elles les plans d’actions par pays. \newline
+		En conséquence, les Business Lines sont responsables de la tenue des objectifs de 
+		rentabilité, de cash, de revenu et de prises de commandes mondiaux dans leurs 
+		domaines respectifs. \newline
+		Voici un descriptif des quatres Business Lines:
+
 		\subsubsection{Security Solutions}
-		Pour les entreprises comme pour les administrations, notre environnement connecté, dématérialisé, mobile, 
-		\og en nuage \fg, est porteur d’opportunités mais aussi de menaces nouvelles. Multiformes et imprévisibles, aux conséquences 
-		directes et indirectes de plus en plus lourdes, les enjeux majeurs de sécurité et de souveraineté se concentrent sur 
-		quatre fronts : l’information numérique, les systèmes critiques, les sites sensibles et les territoires. Acteur 
-		européen de référence de la haute sécurité informatique et électronique, Bull Security Solutions intervient sur ces 
-		quatre domaines, où garantir une sécurité optimale, stricte mais agile, requiert expertise, rigueur et innovation. 
-		S’appuyant sur ses capacités complémentaires de conseil et de mise en œuvre, Bull Security Solutions développe de 
-		bout en bout des solutions de haute sécurité, intégrées et sur mesure, associant étroitement dispositifs physiques, 
-		logiques et électroniques. Capable d’appréhender les risques dans toute leur complexité mais aussi les spécificités 
-		de chaque situation, Bull Security Solutions développe une approche à la fois globale et spécialisée de la sécurité, 
-		et s’impose comme le partenaire de confiance de ses clients.
+		\begin{figure}[h!]
+		\centering \includegraphics[scale=0.4]{orga_secusol.png}
+		\caption{\it Organigramme Security Solutions}
+		\end{figure}
+		\paragraph{Mission}
+		La BL SECURITY SOLUTIONS fédère les activités Produits et Services du Groupe dans le domaine 
+		des systèmes critiques et de la sécurité numérique (sécurité réseaux et cryptographie, gestion des 
+		identités, infrastructures de confiance...). Elle a pour mission d'imposer Bull comme un leader 
+		européen des infrastructures numériques de confiance, en synergie avec les autres BLs. \newline
+		Les solutions portées par la BL ciblent principalement les systèmes ou les dispositifs de protection 
+		du territoire, les flux monétiques ou billettiques, la sécurité physique des sites industriels et la 
+		sécurité logique des entreprises privées ou publiques, des dispositifs de protection personnelle. \newline
+		Elle développe aussi des offres nouvelles en sécurité intérieure et cyber-défense associant les 
+		expertises d'Amesys dans la sécurité militaire et du Groupe dans la sécurité d'entreprise.
+		\newpage
 		\subsubsection{Business Integration Solutions}
-		À travers les procédures dématérialisées, les solutions décisionnelles ou les applications mobiles, la technologie 
-		est de plus en plus étroitement intégrée aux métiers. Agile, évolutive, l’informatique participe à la transformation 
-		rapide des produits et des processus, et devient un puissant facteur de différenciation et de création de valeur. 
-		Spécialiste des processus complexes, des environnements hétérogènes et des systèmes critiques, Bull Business 
-		Integration Solutions aide ses clients à imaginer, concevoir, mettre en œuvre et faire vivre les solutions innovantes 
-		qui leur permettront de tirer pleinement parti des nouveaux outils et des nouveaux usages. S’appuyant sur sa 
-		connaissance approfondie de ses clients et de leur secteur, la Business Line développe de bout en bout des solutions 
-		sur mesure, clés en main, adaptées aux spécificités, aux priorités et aux contraintes de chaque organisation. Fort de 
-		sa stratégie d’industrialisation, de focalisation et de réplication de ses savoir-faire, Bull Business Integration 
-		Solutions apporte à ses clients des compétences métiers rares et les accompagne en toute sécurité dans leurs projets 
-		de transformation vers le Cloud, la mobilité et le Big Data.
+		%a \newline
+		\begin{figure}[!h]
+		\centering \includegraphics[scale=0.4]{orga_bussol.png}
+		\caption{\it Organigramme Business Integration Solutions}
+		\end{figure}
+		\paragraph{Mission}
+		L’ambition de la BL Business Integration Solutions est de devenir une signature Services d’excellence 
+		en France et à l’international en devenant un partenaire référent de nos grands clients dans le 
+		développement d’applications critiques. \newline
+		Pour ce faire, sa stratégie passe par le ciblage et la montée en valeur de nos offres pour l’ensemble du 
+		Groupe. Montée en valeur signifie,  d’une part des prestations à forte valeur ajoutée technique et 
+		fonctionnelle, mais aussi, des solutions allant de bout en bout de la conception ( conseil ) à 
+		l’exploitation en passant par le développement (intégration) de fonctionnalités critiques pour nos 
+		clients. En conséquence, la BL IS travaillera étroitement avec la BL Computing Solutions en matière 
+		d’hébergement de solutions (exploitation) et avec la BL Security Solutions en matière d’offre ou de 
+		compétence en Sécurité. \newline
+		Sa stratégie passe aussi par l’industrialisation, la réplication et l’excellence opérationnelle, gage de la 
+		satisfaction de nos clients et de notre rentabilité. \newline
+		Elle deviendra un leader sur des offres ciblées à forte composante métiers et technologiques.
+		\newpage
 		\subsubsection{Computing Solutions}
-		Pour permettre aux entreprises et aux administrations de se concentrer sur leur cœur de métier, le socle technique, 
-		sur lequel reposent leurs systèmes numériques, est appelé à évoluer. Plus que jamais, les fondations matérielles et 
-		logicielles doivent garantir performance et sécurité, faciliter utilisation et innovation, et contribuer aux enjeux 
-		globaux de l’organisation (maîtrise des coûts, politique environnementale…). Architecte, intégrateur et opérateur 
-		d’infrastructures numériques critiques, Bull Computing Solutions accompagne la transformation des data centers, 
-		notamment vers le Cloud computing. S’appuyant sur les technologies du Groupe et celles de partenaires reconnus 
-		(EMC, Microsoft, Oracle, SAP, VMware…), Bull Computing Solutions réunit des capacités de conseil (Bull Advisory 
-		Services), d’intégration (serveurs, stockage, réseaux…) et d’infogérance (Bull Managed Services) qui lui permettent 
-		de concevoir, bâtir et exploiter des systèmes sûrs et agiles, parfaitement adaptés à l’activité, aux usages, aux 
-		contraintes et à la stratégie de ses clients. Autant d’atouts et de savoir-faire qui font de Bull Computing Solutions 
-		un partenaire de confiance à haute valeur ajoutée.
+		\begin{figure}[!h]
+		\centering \includegraphics[scale=0.4]{orga_compsol.png}
+		\caption{\it Organigramme Computing Solutions}
+		\end{figure}
+		\paragraph{Mission}
+		La mission de la BL Computing Solutions est de fournir à ses clients, en France et à l’International, 
+		des solutions d’infrastructures critiques et sécurisées alliant:
+		\begin{itemize}
+		\item l’intégration des produits Bull (BL Innovative Products) et ceux des partenaires.
+		\item le conseil et le service en ingénierie et en infrastructures.
+		\item le service en Infogérance d'infrastructure et d'exploitation.
+		\item la maintenance et le support.
+		\end{itemize}
+		Ces solutions d’infrastructures rassemblent l’ensemble des savoir-faire, ils sont complétés non seulement par l’expertise en solutions 
+		sécurisées de la BL Sécurité Solutions mais aussi par la maîtrise des processus et des Systèmes 
+		d’Information métiers de la BL Business Intégration Solutions. \newline
+		Par ailleurs, cette BL a pour rôle de continuer à accompagner les clients historiques des systèmes GCOS.
+		\newpage
 		\subsubsection{Innovative products}
-		Affiner la précision des simulations, accroître le nombre de paramètres, élargir les échantillons, les historiques et 
-		les sources de données analysées, accélérer les traitements jusqu’au temps réel… Qu’il s’agisse d’applications 
-		scientifiques, décisionnelles ou de gestion, la puissance de calcul conditionne partout la capacité d’innovation. 
-		Seul constructeur européen, Bull se positionne sur les marchés de la très haute puissance et libère l’ambition de ses 
-		clients. Avec ses solutions d’Extreme Computing, autour des supercalculateurs bullx, Bull apporte aux centres de 
-		recherche, aux bureaux d’étude des grands groupes et aux PME innovantes la maîtrise d’un leader des technologies 
-		pétaflopiques. Mesuré plus rapide serveur x86 au monde, bullion s’impose comme le serveur de choix du Cloud privé et 
-		des environnements critiques. Enfin, pour pérenniser l’investissement et valoriser le capital informationnel de ses 
-		grands clients, Bull fait évoluer ses plates-formes GCOS de façon à concilier puissance, ouverture et flexibilité. 
-		S’appuyant sur l’excellence de sa R\&D et de ses ressources industrielles, Bull Innovative Products conçoit et 
-		fabrique les systèmes de pointe qui relèvent le défi de la puissance.
+		\begin{figure}[!h]
+		\centering \includegraphics[scale=0.4]{orga_innoprod.png}
+		\caption{\it Organigramme Innovative products}
+		\end{figure}
+		\paragraph{Mission}
+		La Business Line Innovative Products est en charge du développement des offres de 
+		supercalculateur et de serveurs haute-performance répondant aux exigences de ses clients pour 
+		leurs applications critiques. \newline
+		En capitalisant sur l’expertise de ses équipes et sur des produits à haute valeur ajoutée dans les 
+		domaines de la simulation numérique (BULLX) et des grands serveurs d’entreprise (NOVASCALE 
+		BULLION et NOVASCALE GCOS), la Business Line Innovative Products a pour ambition d’être 
+		l’acteur-clé européen des supercalculateurs et des serveurs d’entreprise haut de gamme.
 	\section{Secteurs d'activités}
 		\subsection{Présentation}
 		Bull réalise près de 50\% de son chiffre d'affaires à l'international. La vitalité des marchés à fort potentiel, tels 
@@ -650,9 +716,9 @@
 			\subsubsection{Finance}
 			\subsubsection{Défense}
 			\subsubsection{Télécom}
-		\subsection{Actualités}
-			\subsubsection{Cloud Computing}
-			Partenariat avec SFR pour une solution de Cloud (Computing?).
+		%\subsection{Actualités}
+			%\subsubsection{Cloud Computing}
+			%Partenariat avec SFR pour une solution de Cloud (Computing?).
 
 \newpage
 \rhead{Le cadre du stage}
@@ -694,7 +760,7 @@ ou d'en améliorer d'autres.
 		\hline
 		Chassis & Simple largeur & Double largeur & Double largeur \\
 		\hline
-		\multirow{2}*{Processeur} & \multirow{2}*{2 processeurs hexa coeur} & & \\
+		\multirow{2}*{Processeur} & 2 processeurs hexa coeur & & \\
 		\cline{3-4}
 		& Intel Xeon 56xx jusqu’à 3,06GHz & & \\
 		\hline
@@ -713,6 +779,9 @@ ou d'en améliorer d'autres.
 		\end{tabular}
 		\item Accès au Knights Corner d'Echirolles (description machines echirolles).
 		\end{itemize}
+		\subsection{Les Accélérateurs}
+			\subsubsection{GPU}
+			\subsubsection{MIC}
 		\subsection{Les missions}
 			\subsubsection{Knights Ferry}
 				\paragraph{}
@@ -1011,7 +1080,7 @@ ou d'en améliorer d'autres.
 					\caption{Code pour mesurer le temps de transfert CPU vers MIC}
 					\end{center}
 					\end{figure}
-					cela est possible uniquement grâce aux communications asynchrones. C'est-à-dire que l'hôte reprend la main 
+					cela est possible uniquement grâce aux communications synchrones. C'est-à-dire que l'hôte reprend la main 
 					sur le programme que lorsque la communication est terminée. Ainsi on est sûr d'avoir relevé l'heure qu'une 
 					fois les transferts terminés et pas avant. Enfin le programme est paramétrable, on peut choisir la taille 
 					des buffers, le nombre de transferts à effectuer et une limite de temps à ne pas dépasser (voir figure 22).
@@ -1102,7 +1171,7 @@ ou d'en améliorer d'autres.
 				si les applications de tests développées seraient compatibles avec la dernière version du MIC, dans le but d'en 
 				analyser les performances et de les comparer à celle du Knights Ferry.
 				\paragraph{Documentation et drivers}
-				La première étape a donc été de prendre connaissances des modifications apportées par Intel. D'une part côté 
+				La première étape a donc été de prendre connaissance des modifications apportées par Intel. D'une part côté 
 				matériel afin d'estimer les performances théoriques de la carte et d'autre part au niveau logiciel pour pouvoir 
 				modifier s'il le fallait les codes des programmes et des scripts existants.
 				\paragraph{Le contexte}
@@ -1128,6 +1197,10 @@ ou d'en améliorer d'autres.
 			que des explications sur la démarche suivie pour mener à bien les différents tests. \newline
 			Plus généralement j'y ai noté tout ce qui pouvait sembler utile sur les petites difficultés rencontrées ou sur l'utilisation 
 			de certaines commandes linux par exemple.
+			\subsubsection{Information sur le MIC}
+			Contact avec Echirolles. \newline
+			Réunion d'info sur MIC. \newline
+			Explication à 2 colaborateurs. \newline
 	\section{Apports du stage}
 		\subsection{Compétences acquises}
 		Durant mon stage chez Bull, j'ai eu la chance de pouvoir apprendre et améliorer de nombreuses compétences, aussi bien 
@@ -1138,8 +1211,7 @@ ou d'en améliorer d'autres.
 			expérimenter pour apprendre à utiliser la carte. Les erreurs commises lors de ma première tâche m'ont d'ailleurs permis d'avancer 
 			et de maîtriser le sujet. J'ai, de manière plus générale, toujours essayé de chercher les solutions aux problèmes ou les 
 			informations utiles avant de demander autour de moi si vraiment je venais à être bloqué.
-			\subsubsection{Travail en équipe}
-			\subsubsection{Organisation}
+			\subsubsection{Travail en équipe \& Organisation}
 			Un des aspects ou je pense avoir le plus appris est l'organisation. Ceci est une conséquence direct du travail 
 			en équipe. Le fait de devoir être capable d'expliquer à tout moment ses démarches, l'avancée ou la plannification 
 			de son travail, pousse à être organiser et à prevoir dans le temps son activité. Le fait de faire des tâches, de la 
@@ -1150,7 +1222,7 @@ ou d'en améliorer d'autres.
 			des applications simple d'utilisation avec des Makefiles et des Readme pour faciliter leur utilisation mais aussi 
 			pour écrire des codes clairs et commentés. \newline
 			Seul la gestion du temps aura été plus laborieuse, avec parfois une alternance de surcharge de travail avec des moments 
-			plus creux (mois d'aout oblige?).
+			plus creux.
 			\subsubsection{Compétences techniques}
 			La diversité et le nombre de tâche à accomplir nécessite déjà une certaine polyvalence technique et pousse donc à 
 			apprendre toujours de nouvelle chose. J'ai ainsi pu développer mes connaissances sur linux comme sur le noyau et 
@@ -1167,40 +1239,40 @@ ou d'en améliorer d'autres.
 			de l'assembleur pour par exemple vérifier l'utilisation d'instructions 512 bits sous MIC notamment. La nécessité 
 			d'avoir un contrôle assez bas niveau dans des programmes écrit en C a conduit à l'utilisation d'intrinsics que j'avais 
 			très peu utilisés jusqu'alors.
-		\subsection{Difficultés rencontrées et solutions apportées}
 		\subsection{La vie en société}
 		Mon stage chez [•] a été très instructif. Au cours de ces [•] mois, j’ai ainsi pu observer le fonctionnement 
 		d’une [•]. Au-delà, de l’activité de chacun des services, j’ai pu apprendre comment s’articulent les différents 
 		départements d’une telle entreprise. Par ailleurs, les relations humaines entre les différents employés de la 
 		société, indépendamment de l’activité exercée par chacun d’eux, m’a appris sur le comportement à avoir en toute 
 		circonstance.
-			\subsubsection{L’articulation des différents départements}
-			Comme il a été vu plus haut, [•] départements structurent la société [•]. Aussi, et au travers de l’analyse 
-			qui a pu être faite, il apparaît indéniable que tous ces services interviennent à un moment ou a un autre de 
-			la prise de décision. Pour autant, cette prise de décision mérite d’être étudiée spécifiquement, dès lors 
-			qu’elle est largement [•]. En effet, il est possible de comparer ce type de société [•].
-			L’expression la plus éloquente de ce partage de responsabilité est la décision de [•].
-			Aussi, toutes les semaines, les [résultats]  étaient diffusés à tous les employés, de manière à ce qu’ils 
-			soient impliqués dans les résultats de l’entreprise (sachant que le but est chaque semaine d’avoir un maximum 
-			de [•] et à ce qu’ils connaissent [•].
-			[La circulation de l’information est ainsi un des points forts que j’ai retenu de cette société, tant au 
-			niveau du travail collaboratif, que dans l’implication de tous dans le bon fonctionnement de la société.]
-			\subsubsection{Les relations humaines entre les employés}
-			Au-delà du fonctionnement de l’entreprise, j’ai pu ressentir [•].
-			En effet, l’atmosphère au sein de la société était très [•]. J’ai ainsi constaté que la hiérarchie des 
-			fonctions de la société [•] était [•] dans les rapports entre les employés, favorisant par là [•].
-			A titre d’exemple, je [•].
-			[Au travers de cette convivialité, j’ai pu comprendre que l’activité d’une société est plus performante 
-			dans une atmosphère chaleureuse et bienveillante.]
 \newpage
 \rhead{Conclusion}
 \part{Conclusion}
-[La conclusion résume bien sur, dans une première partie, les principales conclusions de votre rapport de stage. Mais la 
-conclusion permet aussi dans une deuxième partie de vous interroger sur la suite, sur l’avenir de l’entreprise, sur le 
-service, et de mettre en perspective votre stage dans votre formation et dans projet professionnel.]
-A titre de conclusion, il semble intéressant de mettre en évidence les questions actuelles qui se posent sur l’avenir de 
-l’industrie de [•], de savoir comment les acteurs économiques vont faire [•]. Au centre de cette question se trouve 
-naturellement le problème de [•]. En effet, mon stage a été très bénéfique à cet égard : [•]. Il en résultera [•]
-La loi du [•] a donné un certain nombre de solutions aux dérives que pourraient prendre le [•]. Pour autant, plutôt 
-que la [•], un changement de [•] apparaît plus à même à régler [•].
+Dans ce rapport, j'ai présenté les principaux travaux effectués au cours de mon stage, le développement d'outils de mesure des 
+performances et de tests de fonctionnalités d'un accélérateur encore à l'état de prototype, le portage de code de tests déjà 
+existant et l'optimisation d'un code de calcul numérique parallèle pour le MIC. J'ai aussi pu travailler sur le projet OpenGPU 
+et efectuer un comparatif energetique entre CPU et GPU. Ce stage aura été très enrichissant, tant sur le plan 
+technique que personnel. \newline
+\newline
+Dans le domaine technique, ce stage a été l'occasion pour moi de travailler sur du matériel encore en développement, ce qui est 
+à la fois passionnant et motivant mais également compliqué à cause du manque d'informations et de documentation. J'ai ainsi pu 
+suivre de prêt l'évolution du MIC de son premier prototype à la version commercial. J'aurai aussi développé mes connaissances en 
+programmation, en optimisation et en deboggage d'applications parallèles. J'ai enfin appris énormement de choses sur le hardware 
+qui est un élément essentiel pour interpreter et comprendre les résultats et je me suis aussi sensibiliser aux problèmes de consomation 
+energétique. \newline
+\newline
+Au niveau humain, le stage m'aura permis de travailler dans une grande entreprise, me donnant l'occasion
+d'appréhender les avantages et les inconvénients de ce genre de structure, alors que mon stage précédent s'était déroulé dans 
+un laboratoire. J'ai interagi avec des membres de léquipe mais également avec ceux d'autres équipes en mettant à disposition 
+mes connaissances sur le sujet et en partageant et en utilisant les outils développés par l'équipe. \newline
+\newline
+J'ai donc vraiment beaucoup apprécié ces six mois, et maintenant que ma formation d'ingénieur
+s'achève c'est avec beaucoup d'entrain et de conviction que j'envisage mon avenir professionnel.
+
+\newpage
+\rhead{Bibliographie}
+\lhead{A}
+\appendix
+\section{Bibliographie}
+
 \end{document}

@@ -6,6 +6,7 @@
 \usepackage{lmodern}
 \usepackage{fancyhdr}
 \usepackage{wrapfig}
+\usepackage{SIunits}
 \usepackage{slashbox}
 \usepackage{array}
 \usepackage{multirow}
@@ -13,6 +14,7 @@
 \usepackage{hyperref}
 \usepackage[left=2cm, right=2cm]{geometry}
 
+\addto\captionsfrench{\def\figurename{\small{Fig}}}
 \hypersetup{
 	backref=true, %permet d'ajouter des liens dans...
 	pagebackref=true, %...les bibliographies
@@ -702,6 +704,7 @@
 		d'affaires réalisée hors d'Europe. \newline
 		A ses compétences technologiques et d'intégration, Bull allie des savoir-faire sectoriels qui lui permettent de développer 
 		des solutions innovantes et sur-mesure, adaptées au contexte de chacun de ses clients.
+		\newpage
 		\begin{figure}[h!]
 		\begin{minipage}[b]{0.5\linewidth}
 		\centering \includegraphics[scale=0.5]{profil2012_ca_repartition_fr.jpg}
@@ -712,13 +715,9 @@
 		\caption{\it Par secteurs}
 		\end{minipage}
 		\end{figure}
-			\subsubsection{Secteur public}
-			\subsubsection{Finance}
-			\subsubsection{Défense}
-			\subsubsection{Télécom}
-		%\subsection{Actualités}
-			%\subsubsection{Cloud Computing}
-			%Partenariat avec SFR pour une solution de Cloud (Computing?).
+		\subsection{Clients}
+			Les secteurs d'activités préférés de Bull sont le secteur Public (CAF), la finance (Société Générale, Natixis, banque du Brésil), la défense (Gendarmerie, DCNS) 
+			et les Télécoms (Vivo 1er opérateur télécom au Brésil).
 
 \newpage
 \rhead{Le cadre du stage}
@@ -749,39 +748,119 @@ Pour mener à bien ces missions, différents matériels étaient accessiblent, d
 Ces différents travaux m'auront aussi permis de mieux appréhender le travail en entreprise, de développer de nouvelles compétences 
 ou d'en améliorer d'autres.
 	\section{Travaux effectués}
-		\subsection{Les outils}
-		\begin{itemize}
-		\item Ordinateur personnel (descriptif).
-		\item Ordinateur, qui contenait l'accélérateur Intel (descriptif).
-		\item Serveurs de calcul bull (description des lames... tableaux etc...). \newline
-		\begin{tabular}{|c|c|c|c|}
-		\hline
-		\backslashbox{Caractéristiques}{Modèles} & B500 & B505 & B510 \\
-		\hline
-		Chassis & Simple largeur & Double largeur & Double largeur \\
-		\hline
-		\multirow{2}*{Processeur} & 2 processeurs hexa coeur & & \\
-		\cline{3-4}
-		& Intel Xeon 56xx jusqu’à 3,06GHz & & \\
-		\hline
-		Chipset & & & \\
-		\hline
-		Mémoire & & & \\
-		\hline
-		Stockage & & & \\
-		\hline
-		Chassis & & & \\
-		\hline
-		Réseau & & & \\
-		\hline
-		OS & & & \\
-		\hline
-		\end{tabular}
-		\item Accès au Knights Corner d'Echirolles (description machines echirolles).
-		\end{itemize}
 		\subsection{Les Accélérateurs}
+			De manière générale un accélérateur est une sorte de coprocesseur spécialement conçu pour effecteur des tâches que le processeur ne peut 
+			effectuer ou effectue très mal. \newline
+			Jusqu'à récemment, le CPU, chef d'orchestre ou processeur central de l'ordinateur, traitait la plupart des opérations lourdes en calcul 
+			comme les simulations physiques, le rendu hors-ligne pour les films, les calculs de risques pour les institutions financières, la 
+			prévision météorologique, l'encodage de fichier vidéo et son, etc. \newline
+			Certains de ces calculs lourds sont cependant facilement parallélisables et peuvent donc bénéficier d'une architecture pensée pour le 
+			calcul parallèle. La plupart des architectures parallèles étaient lourdes, chères et s'adressaient à un marché de niche. Ceci jusqu'à ce 
+			que le GPU s'impose comme un acteur important du calcul parallèle. \newline
 			\subsubsection{GPU}
+			Le GPU est un produit grand public avec une large diffusion grâce aux débouchés des jeux vidéo, ce qui permet d'en réduire les coûts 
+			par rapport à une architecture trop spécialisée. Une architecture relativement bon marché et taillée pour le calcul parallèle.
+			En effet un GPU est constitué de nombreux coeurs de calcul (512 par exemple pour les cartes Fermi de NVidia). Ces coeurs sont très basiques, 
+			il effectuent tous la même opération mais sur des données différentes, ce qui permet de traiter un très grand nombre de données rapidement.
+			Si les premiers GPU étaient à fonctions fixes, ils ont évolué pour devenir programmables. Ainsi depuis la NVIDIA GeForce 3 qui 
+			implémente les Pixels shaders 1.1, les processeurs graphiques disposent d'une unité de géométrie programmable. Et depuis la AMD Radeon 
+			R300 qui implémente les Pixels shaders 2.0, le calcul se fait sur des nombres flottants et plus seulement sur des nombres entiers. \newline
+			Pour programmer les GPUs en language C il faut passer par une technologie particulière, CUDA pour les cartes NVidia (voir figure 22) et OpenCL pour les cartes 
+			AMD/ATI par exemple. Ce qui veut dire qu'un code existant, ne peut pas directement s'exécuter sur un GPU. Des modifications au niveau du 
+			code doivent être apportés et même parfois au niveau algorithmique.
+			\begin{figure}
+			\begin{center}
+			\includegraphics[scale=0.6]{CUDA_processing.png}
+			\caption{Schéma de principe de l'architecture CUDA}
+			\end{center}
+			\end{figure}
 			\subsubsection{MIC}
+			Intel \og Many Integrated Core \fg ou Intel MIC est une architecture mutltiprocesseurs developpée par Intel et qui se base notamment 
+			sur les travaux du projet Larabee. \newline
+			Le prototype, Knights Ferry, a été annoncé et distribué aux développeurs en 2010. Il intégrait un processeur nomé  \og Aubrey Isle \fg gravé 
+			à 45 nm, 32 coeurs \og in-order \fg à 1.2 GHz avec 4 threads par coeur, 2Go de mémoire GDRR5 et 8 Mo de cache L2 (256 Kb par coeur et 32 
+			Ko de cache L1). \newline
+			La version Beta appelée Knights Corner a vu le jour en 2012, gravée en 22 nm et utilisant la technologie tri-gate elle dispose de plus de 
+			50 coeurs à une fréquence allant de 1 à 1.1 GHz et de 6 à 8 Go de mémoire GDRR5. \newline
+			Une version commerciale, connu sous le nom d' Intel Xeon Phi devrait être commercialisée fin 2012. \newline
+			\newline
+			Même si comme les GPUs, les MICs sont des cartes PCI-Express, leur fonctionnement n'est pas comparable. Les GPUs sont indisossiables de la 
+			machine dans laquelle ils sont branchés, c'est-à-dire qu'un GPU doit être piloté par un processeur. Les MICs quant à eux peuvent être 
+			totalement indépendants de la machine. Ils embarquent un {\micro}OS et peuvent donc être vus comme étant eux-même des mini-serveurs. On peut 
+			d'ailleurs s'y connecter par ssh, et accéder au linux embarqué et effectuer quasiment toutes les tâches faisables sur un PC ordinaire. \newline
+			C'est pourquoi pour différencier la machine de la carte, nous emploierons le terme de machine hôte pour désigner la machine qui heberge la carte.
+			Aussi, un code existant et écrit en C, C++ ou Fortran peut-être entièrement compatible avec le MIC et s'exécuter complétement sur la carte. 
+			Les bibliothèques comme OpenMP ou la MKL ont été réécrites pour MIC.
+		\subsection{Les outils}
+			\subsubsection{Ordinateur personnel}
+			J'avais un ordinateur à usage personnel, avec le choix des outils de développement (OS, IDE, logiciel bureautique etc...).
+			Je m'en suis servi essentiellement pour les emails, la réalisation de rapports et la lecture de documentation mais très peu pour programmer 
+			puisque je préférai le faire directement sur la machine avec le MIC.
+			\subsubsection{Ordinateur avec Knights Ferry}
+			La machine avec l'accélérateur (Knights Ferry) était aussi présente dans mon bureau, j'avais donc un accès physique avec la machine. L'OS était une Red Hat 
+			Entreprise 6.0 avec gnome pour interface graphique. Je développais généralement directement sur la machine. Le système hôte était à base 
+			d'Ivy Bridge i7-3770k, avec 8 Go de mémoire DDR3 et un disque SATA de 1To. La carte du MIC partagée le port PCI-Express avec une petite 
+			carte graphique pour gérer l'affichage.
+			\subsubsection{Serveurs Bull}
+			Afin d'effectuer toutes sortes de tests et mesures, l'équipe avait accès à des serveurs de calculs fabriqués par Bull et dans les locaux 
+			des clayes-sous-bois, ce qui était plutôt pratique pour pouvoir vérifier directement quand quelque chose ne fonctionnait pas correctement 
+			au niveau matériel. \newline
+			Les serveurs sont organisés de la sorte: \newline
+			\begin{itemize}
+			\item Une armoire peut contenir jusqu'à 6 chassis reliés entre eux par InfiniBand (voir figure ).
+			\item Un chassis peut contenir jusqu'à 18 lames simples, ou 9 lames doubles reliées elles aussi en InfiniBand (voir figure ).
+			\item Enfin les chassis peuvent être de plusieurs types et sont décris dans le tableau ci-dessous. \newline
+			\end{itemize}
+			\begin{tabular}{|c|c|c|c|}
+			\hline
+			\backslashbox{\small{Hardware}}{\small{Modèles}} & B500 (voir figure ) & B505 (voir figure ) & B510 (voir figure ) \\
+			\hline
+			Chassis & Simple largeur & Double largeur & Double largeur\\
+			\hline
+			\multirow{2}*{Processeur} & 2 processeurs hexa coeur & 2 quadri coeur & 2 x 2 processeurs\\
+			%\cline{3-4}
+			& Intel Xeon 56xx@3,06GHz & Intel Xeon 56xx@2,66GHz & Intel Xeon E5-2600 \\
+			\hline
+			GPU & Non & 2 GPU NVIDIA Tesla & Non\\
+			\hline
+			Chipset & Intel S5500 & 2 x Intel S5520 & 2 x Intel C600 series\\
+			\hline
+			Mémoire & Jusqu’à 192Go DDR3 & Jusqu’à 96Go DDR3 & jusqu'à 2 x 256Go DDR3\\
+			\hline
+			\multirow{2}*{Stockage} & 1 SATA jusqu'à 250Go & 1 SATA jusqu'à 250Go & 2 SATA\\
+			%\cline{3-4}
+			& ou 1 SSD jusqu'à 120Go & ou 1 SSD jusqu'à 120Go & ou 1 SSD\\
+			\hline
+			Réseau & Ethernet 1Go & Ethernet 1Go & 2 x Ethernet 1Go\\
+			\hline
+			OS & Red Hat ou Suse & Red Hat ou Suse & Red Hat ou Suse\\
+			\hline
+			\end{tabular}
+			\begin{figure}[h!]
+			\begin{minipage}[b]{0.18\linewidth}
+			\centering \includegraphics[scale=2]{armoire.jpg}
+			\caption{\it \small{Armoire avec 6 Chassis}}
+			\end{minipage}\hfill
+			\begin{minipage}[b]{0.18\linewidth}
+			\centering \includegraphics[scale=1]{chassis.png}
+			\caption{\it \small{Chassis avec 9 lames B510}}
+			\end{minipage}\hfill
+			\begin{minipage}[b]{0.18\linewidth}
+			\centering \includegraphics[scale=0.25]{bullxb0500.jpg}
+			\caption{\it \small{lame B500}}
+			\end{minipage}\hfill
+			\begin{minipage}[b]{0.18\linewidth}
+			\centering \includegraphics[scale=0.5]{bullxB505.jpg}
+			\caption{\it \small{lame B505}}
+			\end{minipage}\hfill
+			\begin{minipage}[b]{0.18\linewidth}
+			\centering \includegraphics[scale=0.5]{bullxB510_separate.png}
+			\caption{\it \small{lame B510}}
+			\end{minipage}\hfill
+			\end{figure}
+			\subsubsection{Ordinateur avec Knights Corner}
+			La machine avec le Knights Corner était dans les locaux d'Echirolles. Elle est composé de 2 Intel Xeon E5-2670 à 2.60GHz, de 6 Go de mémoire 
+			DDR3. L'OS est une Red Hat Entreprise 6.2.
 		\subsection{Les missions}
 			\subsubsection{Knights Ferry}
 				\paragraph{}
@@ -1170,12 +1249,14 @@ ou d'en améliorer d'autres.
 				Cette version étant plus proche de la version définitive que le Knights Ferry, l'intérêt était donc de voir 
 				si les applications de tests développées seraient compatibles avec la dernière version du MIC, dans le but d'en 
 				analyser les performances et de les comparer à celle du Knights Ferry.
+				\paragraph{Le contexte}
+				La machine étant à Echirolles, l'accès se faisait par ssh. Il a donc fallu avoir de nombreuses discussions avec les collègues d'Echirolles 
+				pour pouvoir mettre en place l'accès. Cette carte étant restée pendant longtemps la seule de type Knights Corner, nous avons également 
+				essayé de nous organiser pour pouvoir utiliser chacun notre tour la carte.
 				\paragraph{Documentation et drivers}
 				La première étape a donc été de prendre connaissance des modifications apportées par Intel. D'une part côté 
 				matériel afin d'estimer les performances théoriques de la carte et d'autre part au niveau logiciel pour pouvoir 
 				modifier s'il le fallait les codes des programmes et des scripts existants.
-				\paragraph{Le contexte}
-				(Accès par ssh, communication avec Echiroles, etc...)
 				\paragraph{Les tests}
 				Dans l'ensemble les tests effectués sur Knights Ferry ont été refaits sur Knights Corner. Certaines parties 
 				de code ont cependant étaient réécrites dû surtout aux modifications logiciel faites sur le MIC. En effet l'assembleur 
@@ -1186,9 +1267,8 @@ ou d'en améliorer d'autres.
 				appliquées car des instructions présentes sur Knights Ferry ne l'était plus sur Knights Corner. Enfin, grâce à 
 				une quantité de mémoire plus importante, des tests supplémentaires ont pu être fait pour SpecInt et SpecOMP.
 		\subsection{Les tâches périphériques}
-		Au cours de mon stage, j’ai pu effectuer des tâches qui se situent à la périphérie du [•]. Dès lors qu’elles 
-		m’ont permiss d’apprendre différents aspects de [•], il paraît approprié de s’y attarder. Il s’agit du [•] et 
-		de [•] :
+		Au cours de mon stage, j’ai pu effectuer des tâches qui se situent à la périphérie de mes missions. Dès lors qu’elles 
+		m’ont permiss d’apprendre différents aspects du métier, il paraît approprié de s’y attarder.
 			\subsubsection{Wiki}
 			Durant toute la durée de mon stage je me suis attaché à tenir à jour un wiki interne. J'y ai noté les aspects techniques 
 			concernant mes travaux sur le MIC afin que chacun puisse profiter de l'expérience et des connaissances acquises. 
@@ -1198,9 +1278,12 @@ ou d'en améliorer d'autres.
 			Plus généralement j'y ai noté tout ce qui pouvait sembler utile sur les petites difficultés rencontrées ou sur l'utilisation 
 			de certaines commandes linux par exemple.
 			\subsubsection{Information sur le MIC}
-			Contact avec Echirolles. \newline
-			Réunion d'info sur MIC. \newline
-			Explication à 2 colaborateurs. \newline
+			J'ai aussi été régulièrement en contact avec 2 collègues d'Echirolles, Mathieu Dubois et Ludovic Sauge, qui travaillaient également sur 
+			le MIC. Nous avons échangés sur les résultats, les différents problèmes rencontrés ce qui m'a permis d'établir des contacts avec d'autres équipes 
+			d'apprendre sur les méthodes de travails. \newline
+			J'ai participé également à une réunion sur les GPUs et les MICs. J'étais chargé de donner les informations collectées sur le MIC pour 
+			deux collègues qui n'étaient pas familiarisés avec les MICs et qui en avaient besoin avant un voyage. Suite à cette réunion j'ai préparé une documentation sur l'utilisation des différents outils à notre disposition 
+			pour pouvoir tester rapidement que les cartes MIC étaient fonctionnelles et qu'ils ont pu prendre avec eux.
 	\section{Apports du stage}
 		\subsection{Compétences acquises}
 		Durant mon stage chez Bull, j'ai eu la chance de pouvoir apprendre et améliorer de nombreuses compétences, aussi bien 

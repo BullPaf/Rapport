@@ -35,17 +35,39 @@
 
 \title{Rapport de stage}
 \author{Chadi \bsc{AKEL}}
-\date{\today}
+%\date{\today}
 
 \begin{document}
+\textsf{}
+\begin{center}
+\LARGE{	Rapport de Stage} \newline
+\LARGE{	AKEL Chadi} \newline
+\end{center}
+\begin{figure}[!h]
+\begin{center}
+\includegraphics[scale=0.4]{bull_logo.jpg}
+\end{center}
+\end{figure}
+\begin{figure}[h!]
+\begin{minipage}[b]{0.33\linewidth}
+\centering \includegraphics[scale=0.4]{logo_ECP.png}
+\end{minipage}\hfill
+\begin{minipage}[b]{0.33\linewidth}
+\centering \includegraphics[scale=0.5]{logo_mihp.jpg}
+\end{minipage}\hfill
+\begin{minipage}[b]{0.33\linewidth}
+\centering \includegraphics[scale=0.4]{logo_uvsq.png}
+\end{minipage}\hfill
+\end{figure}
+\newpage
 \pagestyle{fancy}
 \lhead{\thepart}
-\chead{}
-\lfoot{}
+%\chead{}
+%\lfoot{}
+%\normalsize{}
 \cfoot{\thepage}
-\rfoot{}
-\maketitle
-\newpage
+%\rfoot{}
+%\maketitle
 \rhead{Sommaire}
 \renewcommand{\contentsname}{Sommaire}
 %\renewcommand{\includegraphics}{Figure}
@@ -595,7 +617,7 @@
 		mettre le Groupe sur le chemin d’une croissance rentable.
 		\newpage
 		\subsection{Organisations}
-		Bull regroupe plus de 9000 d’employés (on compte environ [•] employés dans les locaux des Clayes-sous-bois), et est 
+		Bull regroupe plus de 9000 d’employés, et est 
 		présent dans plus de 50 pays. Son chiffre d'affaire atteind en 2011 1.30 Milliard d'Euros. Le groupe s'organise en 
 		quatre départements appelés Business Lines, tous sous la direction du Président-directeur général, Philippe Vannier.
 		\begin{figure}[h!]
@@ -708,11 +730,11 @@
 		\begin{figure}[h!]
 		\begin{minipage}[b]{0.5\linewidth}
 		\centering \includegraphics[scale=0.5]{profil2012_ca_repartition_fr.jpg}
-		\caption{\it Géographique}
+		\caption{\it \small{Chiffre d'affaire par géographie}}
 		\end{minipage}\hfill
 		\begin{minipage}[b]{0.5\linewidth}
 		\centering \includegraphics[scale=0.5]{profil2012_ca_repartitionsecteur_fr.jpg}
-		\caption{\it Par secteurs}
+		\caption{\it \small{Chiffre d'affaire par secteurs}}
 		\end{minipage}
 		\end{figure}
 		\subsection{Clients}
@@ -723,18 +745,33 @@
 \rhead{Le cadre du stage}
 \part{Le cadre du stage}
 	\section{L'équipe}
-	Equipe performance dans le section SDD (server design and development) du département innovative products. L'équipe était 
-	à mon arrivé composée de 6 personnes moi y compris:
+	\subsection{Présentation}
+	Mon stage s'est déroulé dans l'équipe performances dans le section SDD (server design and development) elle même dans le département Innovative 
+	Products située dans les locaux des Clayes-sous-bois. L'équipe était composée à mon arrivée de 6 personnes moi y compris:
 	\begin{itemize}
 	\item Jean-François Lemerre
 	\item Alain Chasles
 	\item Marc Simon
 	\item Isabelle Cabello
-	\item Gaetan Bayle des courchamps
+	\item Gaetan Bayle Des Courchamps
 	\end{itemize}
+		\subsubsection{Organigramme}
+		\begin{figure}[!h]
+		\begin{center}
+		\includegraphics[scale=0.45]{orga_sdd.png}
+		\caption{\small{Organigramme SDD}}
+		\end{center}
+		\end{figure}
 	Fin Juillet, le contrat de Gaetan prenait fin.
-	\section{Fonctionnement}
-
+	\subsection{Objectif}
+	L'équipe a plusieurs rôles. Tout d'abord et comme son nom l'indique, sa mission principale est d'évaluer les performances des différentes machines 
+	et matériels pour s'assurer qu'elles correspondent bien aux valeurs théoriques attendues. Elle doit pour cela développer ses propres outils de 
+	mesures et de tests. L'équipe peut également avoir des missions de veille technologique pour des clients, mais aussi avoir un gros travail logiciel 
+	avec la mise au point d'images système contenant tous les outils et drivers nécessaires à l'exploitation des machines. L'équipe est également 
+	amenée à comprendre et corriger les disfonctionnements logiciels qui peuvent arriver sur des machines chez les clients.\newline
+	Les compétences dans l'équipe sont donc très variées. En effet il faut avoir de bonne connaissances en hardware (architecture des ordinateurs) et 
+	en software (drivers, développement d'outils, etc...) pour pouvoir correctement évaluer les performances d'une machine. Mais aussi en administration 
+	Linux pour tout ce qui concerne la mise au point logiciel et les dépannages éventuelles sur toutes sortes de machines et d'applications.
 \newpage
 \rhead{Travaux effectués et apports du stage}
 \part{Travaux effectués et apports du stage}
@@ -749,14 +786,14 @@ Ces différents travaux m'auront aussi permis de mieux appréhender le travail e
 ou d'en améliorer d'autres.
 	\section{Travaux effectués}
 		\subsection{Les Accélérateurs}
-			De manière générale un accélérateur est une sorte de coprocesseur spécialement conçu pour effecteur des tâches que le processeur ne peut 
-			effectuer ou effectue très mal. \newline
+			De manière générale un accélérateur est une sorte de coprocesseur spécialement conçu pour effectuer des tâches que le processeur ne peut 
+			accomplir ou alors très mal. \newline
 			Jusqu'à récemment, le CPU, chef d'orchestre ou processeur central de l'ordinateur, traitait la plupart des opérations lourdes en calcul 
 			comme les simulations physiques, le rendu hors-ligne pour les films, les calculs de risques pour les institutions financières, la 
 			prévision météorologique, l'encodage de fichier vidéo et son, etc. \newline
 			Certains de ces calculs lourds sont cependant facilement parallélisables et peuvent donc bénéficier d'une architecture pensée pour le 
 			calcul parallèle. La plupart des architectures parallèles étaient lourdes, chères et s'adressaient à un marché de niche. Ceci jusqu'à ce 
-			que le GPU s'impose comme un acteur important du calcul parallèle. \newline
+			que le GPU s'impose comme un acteur important du calcul parallèle.
 			\subsubsection{GPU}
 			Le GPU est un produit grand public avec une large diffusion grâce aux débouchés des jeux vidéo, ce qui permet d'en réduire les coûts 
 			par rapport à une architecture trop spécialisée. Une architecture relativement bon marché et taillée pour le calcul parallèle.
@@ -775,10 +812,10 @@ ou d'en améliorer d'autres.
 			\end{center}
 			\end{figure}
 			\subsubsection{MIC}
-			Intel \og Many Integrated Core \fg ou Intel MIC est une architecture mutltiprocesseurs developpée par Intel et qui se base notamment 
+			Intel \og{} Many Integrated Core \fg{} ou Intel MIC est une architecture mutltiprocesseurs developpée par Intel et qui se base notamment 
 			sur les travaux du projet Larabee. \newline
-			Le prototype, Knights Ferry, a été annoncé et distribué aux développeurs en 2010. Il intégrait un processeur nomé  \og Aubrey Isle \fg gravé 
-			à 45 nm, 32 coeurs \og in-order \fg à 1.2 GHz avec 4 threads par coeur, 2Go de mémoire GDRR5 et 8 Mo de cache L2 (256 Kb par coeur et 32 
+			Le prototype, Knights Ferry, a été annoncé et distribué aux développeurs en 2010. Il intégrait un processeur nomé  \og{} Aubrey Isle \fg{} gravé 
+			à 45 nm, 32 coeurs \og{} in-order \fg{} à 1.2 GHz avec 4 threads par coeur, 2Go de mémoire GDRR5 et 8 Mo de cache L2 (256 Kb par coeur et 32 
 			Ko de cache L1). \newline
 			La version Beta appelée Knights Corner a vu le jour en 2012, gravée en 22 nm et utilisant la technologie tri-gate elle dispose de plus de 
 			50 coeurs à une fréquence allant de 1 à 1.1 GHz et de 6 à 8 Go de mémoire GDRR5. \newline
@@ -818,7 +855,6 @@ ou d'en améliorer d'autres.
 			Chassis & Simple largeur & Double largeur & Double largeur\\
 			\hline
 			\multirow{2}*{Processeur} & 2 processeurs hexa coeur & 2 quadri coeur & 2 x 2 processeurs\\
-			%\cline{3-4}
 			& Intel Xeon 56xx@3,06GHz & Intel Xeon 56xx@2,66GHz & Intel Xeon E5-2600 \\
 			\hline
 			GPU & Non & 2 GPU NVIDIA Tesla & Non\\
@@ -828,7 +864,6 @@ ou d'en améliorer d'autres.
 			Mémoire & Jusqu’à 192Go DDR3 & Jusqu’à 96Go DDR3 & jusqu'à 2 x 256Go DDR3\\
 			\hline
 			\multirow{2}*{Stockage} & 1 SATA jusqu'à 250Go & 1 SATA jusqu'à 250Go & 2 SATA\\
-			%\cline{3-4}
 			& ou 1 SSD jusqu'à 120Go & ou 1 SSD jusqu'à 120Go & ou 1 SSD\\
 			\hline
 			Réseau & Ethernet 1Go & Ethernet 1Go & 2 x Ethernet 1Go\\
@@ -1212,10 +1247,13 @@ ou d'en améliorer d'autres.
 				\end{itemize}
 				Il a fallu pour cela adapter les Makefiles et configurer correctement l'environnement (variables 
 				d'environnement, version de MPI, etc). 
-				J'ai ensuite établie un protocole de test, c'est-à-dire déterminr les paramètres d'exécution afin que les trois 
-				mesures soient équivalentes. (Parler de la config pour utiliser plusieurs lames). \newline
-				(AHHHHHHHH j'ai oublié de parler du problème de la maccro qui faisait planter le programme avec la version 11
-				d'icc. Utilisation de gdb pour comprendre et installation de la version 12 d'icc!!) \newline
+				J'ai ensuite établie un protocole de test, c'est-à-dire déterminer les paramètres d'exécution afin que les trois 
+				mesures soient équivalentes. \newline
+				Malheureusement et bien que le code compilait correctement, le programme calculait après quelques itérations des valeurs absolument 
+				fausses et planté au bout d'un moment à cause de dépacement de capacité. Il a donc fallu se plonger dans le code et tenter d'en comprendre 
+				la ou les raisons. Après avoir écarté manuellement les hypothèses les plus plosibles comme des erreurs d'initialisations ou réécrit certains 
+				bout de code les erreurs persistaient. Pour approfondir l'analyse l'utilisation d'un déboggueur était nécessaire. Mais l'utilisation d'un déboggueur
+				sur une application parallèle
 				Finalement, après plusieurs essaies et paramétrages, les tests ont été effectués 
 				sur les machines et les résultats fournis aux autres membres de l'équipe.
 				\paragraph{}
@@ -1323,8 +1361,8 @@ ou d'en améliorer d'autres.
 			d'avoir un contrôle assez bas niveau dans des programmes écrit en C a conduit à l'utilisation d'intrinsics que j'avais 
 			très peu utilisés jusqu'alors.
 		\subsection{La vie en société}
-		Mon stage chez [•] a été très instructif. Au cours de ces [•] mois, j’ai ainsi pu observer le fonctionnement 
-		d’une [•]. Au-delà, de l’activité de chacun des services, j’ai pu apprendre comment s’articulent les différents 
+		Mon stage chez Bull a été très instructif. Au cours de ces 6 mois, j’ai ainsi pu observer le fonctionnement 
+		d’une entreprise. Au-delà, de l’activité de chacun des services, j’ai pu apprendre comment s’articulent les différents 
 		départements d’une telle entreprise. Par ailleurs, les relations humaines entre les différents employés de la 
 		société, indépendamment de l’activité exercée par chacun d’eux, m’a appris sur le comportement à avoir en toute 
 		circonstance.
@@ -1357,5 +1395,8 @@ s'achève c'est avec beaucoup d'entrain et de conviction que j'envisage mon aven
 \lhead{A}
 \appendix
 \section{Bibliographie}
-
+\begin{itemize}
+\item \url{www.bull.com}
+\item \url{www.wikipedia.com}
+\end{itemize}
 \end{document}
